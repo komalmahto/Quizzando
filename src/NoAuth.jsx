@@ -1,12 +1,6 @@
-import React from "react";
-import {
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
-  Button,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+import React from "react"
+
+import { Link } from "react-router-dom"
 function not_auth() {
   return (
     <div
@@ -27,12 +21,8 @@ function not_auth() {
           Login
         </Link>{" "}
       </h1>
-      {/* <Button>
-        <a href="/login"></a>
-        Login
-      </Button> */}
     </div>
-  );
+  )
 }
 
-export default not_auth;
+export default not_auth

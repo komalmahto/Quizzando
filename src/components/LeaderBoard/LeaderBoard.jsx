@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react"
 import "./LeaderBoard.css"
-//import "flag-icon-css/css/flag-icon.css";
 import axios from "axios"
-
 import { USER_SERVER } from "../../config"
 import { styled } from "@mui/material/styles"
 import Table from "@mui/material/Table"
@@ -37,14 +35,6 @@ function createData(position, name, plays, points) {
   return { position, name, plays, points }
 }
 
-// const rows = [
-//   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-//   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-//   createData("Eclair", 262, 16.0, 24, 6.0),
-//   createData("Cupcake", 305, 3.7, 67, 4.3),
-//   createData("Gingerbread", 356, 16.0, 49, 3.9),
-// ];
-
 export default function Leaderboard(props) {
   const [leaderBoard, setLeaderBoard] = useState("")
   useEffect(() => {
@@ -53,14 +43,12 @@ export default function Leaderboard(props) {
         `${USER_SERVER}/quiz/${props.id}/leaderboard`
       )
       setLeaderBoard(leaderData.data.payload.result)
-      // console.log(leaderData.data.payload);
     }
     leaderboard()
   }, [])
   let rows = []
   leaderBoard &&
     leaderBoard.map((item, idx) => {
-      //console.log(item.score);
       rows &&
         rows.push(
           createData(
@@ -71,12 +59,14 @@ export default function Leaderboard(props) {
           )
         )
     })
-  //console.log(rows[0].points);
-  //console.log("yesss")
+
   return (
     <>
       <div className="leaderboard__title">
-        <img src="https://www.quizando.com/assets/leaderboard_icon.png" />
+        <img
+          alt=""
+          src="https://www.quizando.com/assets/leaderboard_icon.png"
+        />
         <h1 style={{ fontSize: "30px", fontFamily: "Paytone One" }}>
           Current Leaderboard
         </h1>
@@ -103,7 +93,6 @@ export default function Leaderboard(props) {
                 backgroundImage:
                   "url(https://cdn1.vectorstock.com/i/1000x1000/78/80/young-woman-head-avatar-cartoon-face-character-vector-21787880.jpg)",
               }}
-              //style="background-image: url(&#39;https://randomuser.me/api/portraits/men/31.jpg&#39;)"
             ></div>
             <div class="name">{rows[0]?.name}</div>
             <div class="score">{rows[0]?.points}</div>
@@ -116,7 +105,6 @@ export default function Leaderboard(props) {
                 backgroundImage:
                   "url(https://cdn1.vectorstock.com/i/1000x1000/78/80/young-woman-head-avatar-cartoon-face-character-vector-21787880.jpg)",
               }}
-              // style="background-image: url(&#39;https://randomuser.me/api/portraits/women/91.jpg&#39;)"
             ></div>
             <div class="name">{rows[2]?.name}</div>
             <div class="score">{rows[2]?.points}</div>
@@ -133,7 +121,6 @@ export default function Leaderboard(props) {
                     backgroundImage:
                       "url(https://cdn1.vectorstock.com/i/1000x1000/78/80/young-woman-head-avatar-cartoon-face-character-vector-21787880.jpg)",
                   }}
-                  // style="background-image: url(&#39;https://randomuser.me/api/portraits/men/88.jpg&#39;)"
                 ></div>
                 <div class="name">{item?.name}</div>
                 <div class="score">{item?.points}</div>
@@ -165,8 +152,8 @@ export default function Leaderboard(props) {
             </TableHead>
             <TableBody>
               {rows &&
-                rows.map((row, idx) =>
-                  idx > 9 ? (
+                rows.map((row, idx) => {
+                  return idx > 9 ? (
                     <StyledTableRow key={row.name}>
                       <StyledTableCell align="center">
                         {row.position}
@@ -184,7 +171,7 @@ export default function Leaderboard(props) {
                   ) : (
                     ""
                   )
-                )}
+                })}
             </TableBody>
           </Table>
         </TableContainer>

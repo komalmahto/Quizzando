@@ -1,7 +1,4 @@
-import { useDispatch } from "react-redux";
-import registerUser from "../../Actions/user_actions";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 import {
   Typography,
   TextField,
@@ -13,14 +10,14 @@ import {
   FormControl,
   createTheme,
   ThemeProvider,
-} from "@mui/material";
-import { React, useState, useContext } from "react";
-import { USER_SERVER } from "../../config";
-import "./LogIn.css";
-import { useHistory } from "react-router";
-import axios from "axios";
-import { AuthContext } from "../../Context/AuthContext";
-import { loginCall } from "../../apiCalls";
+} from "@mui/material"
+import { React, useState, useContext } from "react"
+import { USER_SERVER } from "../../config"
+import "./LogIn.css"
+import { useHistory } from "react-router"
+import axios from "axios"
+import { AuthContext } from "../../Context/AuthContext"
+import { loginCall } from "../../apiCalls"
 const theme = createTheme({
   palette: {
     facebook: {
@@ -39,16 +36,16 @@ const theme = createTheme({
       main: "var(--ored)",
     },
   },
-});
+})
 
 function SignUp() {
-  const { isFetching, dispatch } = useContext(AuthContext);
-  const [field, setField] = useState({});
-  const history = useHistory();
+  const { isFetching, dispatch } = useContext(AuthContext)
+  const [field, setField] = useState({})
+  const history = useHistory()
   const handleSubmit = async (e) => {
-    console.log(field);
-    const response = await axios.post(`${USER_SERVER}/signup`, field);
-    console.log(response.data.statusCode);
+    console.log(field)
+    const response = await axios.post(`${USER_SERVER}/signup`, field)
+    console.log(response.data.statusCode)
     if (response.data.statusCode === 201) {
       loginCall(
         {
@@ -56,11 +53,11 @@ function SignUp() {
           password: field.password,
         },
         dispatch
-      );
+      )
       if (!isFetching) {
-        history.push("/playQuiz");
+        history.push("/playQuiz")
       } else {
-        alert("error");
+        alert("error")
       }
     }
 
@@ -80,14 +77,14 @@ function SignUp() {
     //       alert("error");
     //     }
     //   });
-  };
+  }
   const handleOnChange = (e) => {
-    const name = e.target.name;
+    const name = e.target.name
     setField((prev) => ({
       ...prev,
       [name]: e.target.value,
-    }));
-  };
+    }))
+  }
 
   return (
     <div className="signupContainer">
@@ -205,7 +202,7 @@ function SignUp() {
                     key={val}
                   />
                 </Grid>
-              );
+              )
             })}
           </Grid>
           <FormControl component="fieldset">
@@ -253,7 +250,7 @@ function SignUp() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default SignUp;
+export default SignUp

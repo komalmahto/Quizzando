@@ -1,30 +1,30 @@
-import React, { useState, useContext } from "react";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { Link, NavLink } from "react-router-dom";
-import { useHistory } from "react-router";
-import { AuthContext } from "../../Context/AuthContext";
-import "./Navbar.css";
+import React, { useState, useContext } from "react"
+import AccountCircleIcon from "@material-ui/icons/AccountCircle"
+import { Link } from "react-router-dom"
+import { useHistory } from "react-router"
+import { AuthContext } from "../../Context/AuthContext"
+import "./Navbar.css"
 
 export default function Navbar() {
-  const [flag, setFlag] = useState(false);
-  const { user } = useContext(AuthContext);
-  const history = useHistory();
+  const [flag, setFlag] = useState(false)
+  const { user } = useContext(AuthContext)
+  const history = useHistory()
   function show() {
-    setFlag(!flag);
+    setFlag(!flag)
   }
   function hide() {
-    setFlag(false);
+    setFlag(false)
   }
   window.addEventListener("resize", function (event) {
     if (window.innerWidth > 993) {
-      setFlag(false);
+      setFlag(false)
     }
-  });
+  })
   const handleLogOut = () => {
-    localStorage.removeItem("user");
-    history.push("/login");
-    window.location.reload();
-  };
+    localStorage.removeItem("user")
+    history.push("/login")
+    window.location.reload()
+  }
   return (
     <div className="navbar">
       <div className="navbar__login__separate__block">
@@ -101,7 +101,7 @@ export default function Navbar() {
                     {item.title}
                   </Link>
                 </li>
-              );
+              )
             })}
           </ul>
 
@@ -232,5 +232,5 @@ export default function Navbar() {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,10 +1,10 @@
-import React from "react";
-import "./Footer.css";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import InstagramIcon from "@material-ui/icons/Instagram";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import { Link } from "react-router-dom";
-import Footer_data from "./F__Data";
+import React from "react"
+import "./Footer.css"
+import TwitterIcon from "@material-ui/icons/Twitter"
+import InstagramIcon from "@material-ui/icons/Instagram"
+import FacebookIcon from "@material-ui/icons/Facebook"
+import { Link } from "react-router-dom"
+import Footer_data from "./F__Data"
 export default function Footer() {
   return (
     <div class="footer">
@@ -21,10 +21,10 @@ export default function Footer() {
                   >
                     <h2>{item2.title}</h2>
                   </Link>
-                );
+                )
               })}
             </div>
-          );
+          )
         })}
 
         <div className="footer__payments">
@@ -36,9 +36,9 @@ export default function Footer() {
           </div>
           <h2 className="customer__support">Customer Support</h2>
           <div className="payment__options">
-            <img src="https://www.quizando.com/assets/visa.png" />
-            <img src="https://www.quizando.com/assets/mastercard.png" />
-            <img src="https://www.quizando.com/assets/PayPal.png" />
+            <img alt="" src="https://www.quizando.com/assets/visa.png" />
+            <img alt="" src="https://www.quizando.com/assets/mastercard.png" />
+            <img alt="" src="https://www.quizando.com/assets/PayPal.png" />
           </div>
         </div>
       </div>
@@ -53,15 +53,19 @@ export default function Footer() {
       <div className="footer__bottom">
         <div className="footer__bottom__content">
           <div className="left__section">
-            <img src="https://www.quizando.com/assets/Quizando-Logo.png" />
+            <img
+              alt=""
+              src="https://www.quizando.com/assets/Quizando-Logo.png"
+            />
             <span>Copyright © {new Date().getFullYear()}</span>
           </div>
           <img
+            alt=""
             className="webmatters"
             src="https://www.quizando.com/assets/webmatters.png"
           />
         </div>
       </div>
     </div>
-  );
+  )
 }
