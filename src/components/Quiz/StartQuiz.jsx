@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { connect, useSelector } from "react-redux";
-import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
-import "./StartQuiz.css";
-import Leaderboard from "../LeaderBoard/LeaderBoard";
+import React, { useEffect, useState } from "react"
+import { Link, useParams } from "react-router-dom"
+import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite"
+import "./StartQuiz.css"
+import Leaderboard from "../LeaderBoard/LeaderBoard"
 import {
   Button,
   Dialog,
@@ -11,22 +10,20 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from "@mui/material";
+} from "@mui/material"
 function StartQuiz(props) {
-  let { quizId } = useParams();
-  console.log(quizId);
+  let { quizId } = useParams()
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   const handleClickOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
-  useEffect(() => {}, []);
-  console.log(props);
+    setOpen(false)
+  }
+
   return (
     <div>
       <div className="outer_game_div"></div>
@@ -34,13 +31,8 @@ function StartQuiz(props) {
         className="game__info"
         style={{
           backgroundColor: "#025955",
-          // backgroundImage: `url(${"https://images.unsplash.com/photo-1614294148960-9aa740632a87?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8eGJveHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"})`,
         }}
       >
-        {/* <p className="current__prize_">
-          <span className="current_s1">Current Prize</span>
-          <span className="current_s2">€25.00!</span>
-        </p> */}
         <div className="current__prize">
           <h5>Current Prize</h5>
           <h1>€25.00!</h1>
@@ -136,13 +128,6 @@ function StartQuiz(props) {
             </button>
           </Link>
         )}
-
-        {/* <Link to="/playQuiz" style={{ textDecoration: "none" }}>
-          <div id="play__quiz">
-            <h1>Play Quiz!</h1>
-            <p>No Tokens Needed!</p>
-          </div>
-        </Link> */}
       </div>
       <div className="final__entry">
         <h2 className="final__entry__title">
@@ -215,7 +200,7 @@ function StartQuiz(props) {
         </>
       )}
     </div>
-  );
+  )
 }
 
-export default StartQuiz;
+export default StartQuiz

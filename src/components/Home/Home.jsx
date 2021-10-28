@@ -1,19 +1,13 @@
-import "./Home.css";
-import React from "react";
-import Carousel from "react-bootstrap/Carousel";
-import homedata from "./homedata";
-import CountUp, { useCountUp } from "react-countup";
-import FreeQuiz from "../Quiz/FeeQuiz";
-import ClassicQuiz from "../Quiz/ClassicQuiz";
-import LiveQuiz from "../Quiz/LiveQuiz";
-//const pure = new PureCounter();
+import "./Home.css"
+import React from "react"
+import Carousel from "react-bootstrap/Carousel"
+import homedata from "./homedata"
+import CountUp from "react-countup"
+import FreeQuiz from "../Quiz/FeeQuiz"
+import ClassicQuiz from "../Quiz/ClassicQuiz"
+import LiveQuiz from "../Quiz/LiveQuiz"
+
 export default function Home() {
-  const countUpRef = React.useRef(null);
-  const { start, pauseResume, reset, update } = useCountUp({
-    ref: countUpRef,
-    duration: 5,
-    end: 10000,
-  });
   return (
     <>
       <div className="home">
@@ -29,7 +23,11 @@ export default function Home() {
               >
                 <div className="home__content">
                   <div className="home__left">
-                    <img className="home__left__image" src={item.fg_image} />
+                    <img
+                      className="home__left__image"
+                      src={item.fg_image}
+                      alt=""
+                    />
                   </div>
                   <div className="home__right">
                     <h1>{item.header}</h1>
@@ -38,7 +36,7 @@ export default function Home() {
                   </div>
                 </div>
               </Carousel.Item>
-            );
+            )
           })}
         </Carousel>
         <div className="home__bottom">
@@ -65,16 +63,22 @@ export default function Home() {
 
       <div className="games__btns">
         <h3>
-          <img src="https://www.quizando.com/assets/svg/live_icon.svg" />
+          <img alt="" src="https://www.quizando.com/assets/svg/live_icon.svg" />
           Live!
         </h3>
 
         <h3>
-          <img src="https://www.quizando.com/assets/svg/notokens_icon.svg" />
+          <img
+            alt=""
+            src="https://www.quizando.com/assets/svg/notokens_icon.svg"
+          />
           Free Games
         </h3>
         <h3>
-          <img src="https://www.quizando.com/assets/svg/classics_icon.svg" />
+          <img
+            alt=""
+            src="https://www.quizando.com/assets/svg/classics_icon.svg"
+          />
           Classics
         </h3>
       </div>
@@ -84,26 +88,6 @@ export default function Home() {
       <FreeQuiz />
       <LiveQuiz />
       <ClassicQuiz />
-      {/* <div className="buttons__play">
-        <div className="gradient__cont">
-          <div
-            className="gradient"
-            style={{
-              background:
-                "linear-gradient(to right, rgb(255, 63, 95), rgb(255, 63, 95), white, rgb(255, 63, 95), rgb(255, 63, 95), white, rgb(255, 63, 95), rgb(255, 63, 95))",
-            }}
-          >
-            <div className="category__live">
-              <div className="category__details">
-                <a href="" className="title">
-                  <img src="" alt="" className="title__img" />
-                  <span className="title__span">Live!</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div> 
-      </div>*/}
     </>
-  );
+  )
 }

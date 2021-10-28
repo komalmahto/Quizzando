@@ -68,7 +68,6 @@ function Rough({
       setTimeout(() => {
         setShow(true)
         update(0)
-        console.log("1")
       }, 14000)
     }
   }, [])
@@ -77,7 +76,7 @@ function Rough({
     setTimeout(function () {
       setNext(false)
       update(0)
-      console.log("2")
+
       setShow(true)
     }, 3000)
   }
@@ -98,7 +97,7 @@ function Rough({
   const handleSelectOption = async (x, type) => {
     setDisable(true)
     const current = countUpRef?.current?.innerHTML
-    console.log(countUpRef?.current?.innerHTML)
+
     let answer = x
     let questionId = question?._id
     let URL

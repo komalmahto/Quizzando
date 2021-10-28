@@ -1,7 +1,4 @@
-import { useDispatch } from "react-redux";
-import loginUser from "../../Actions/user_actions";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 import {
   Typography,
   TextField,
@@ -9,12 +6,12 @@ import {
   createTheme,
   ThemeProvider,
   Stack,
-} from "@mui/material";
-import "./LogIn.css";
-import { React, useState, useContext } from "react";
-import { useHistory } from "react-router";
-import { AuthContext } from "../../Context/AuthContext";
-import { loginCall } from "../../apiCalls";
+} from "@mui/material"
+import "./LogIn.css"
+import { React, useState, useContext } from "react"
+import { useHistory } from "react-router"
+import { AuthContext } from "../../Context/AuthContext"
+import { loginCall } from "../../apiCalls"
 
 const theme = createTheme({
   palette: {
@@ -34,35 +31,35 @@ const theme = createTheme({
       main: "var(--ored)",
     },
   },
-});
+})
 
 function Login({ user }) {
-  const { isFetching, dispatch } = useContext(AuthContext);
+  const { isFetching, dispatch } = useContext(AuthContext)
 
-  const [field, setField] = useState({});
-  const history = useHistory();
+  const [field, setField] = useState({})
+  const history = useHistory()
   const handleSubmit = async (e) => {
-    console.log(field);
+    console.log(field)
     loginCall(
       {
         username: field.username,
         password: field.password,
       },
       dispatch
-    );
+    )
     if (!isFetching) {
-      history.push("/playQuiz");
+      history.push("/playQuiz")
     } else {
-      alert("error");
+      alert("error")
     }
-  };
+  }
   const handleOnChange = (e) => {
-    const name = e.target.name;
+    const name = e.target.name
     setField((prev) => ({
       ...prev,
       [name]: e.target.value,
-    }));
-  };
+    }))
+  }
 
   return (
     <div className="signupContainer">
@@ -153,7 +150,7 @@ function Login({ user }) {
                   variant="outlined"
                   key={val}
                 />
-              );
+              )
             })}
           </Stack>
           <p style={{ margin: "1em 0 0 0", fontSize: "1.6em" }}>
@@ -183,7 +180,7 @@ function Login({ user }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react"
 import {
   Button,
   Dialog,
@@ -6,35 +6,35 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from '@mui/material';
+} from "@mui/material"
 
 function ResultModle({ result }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   const handleClickOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   return (
     <div>
-      <Button className='submmit' variant='outlined' onClick={handleClickOpen}>
+      <Button className="submmit" variant="outlined" onClick={handleClickOpen}>
         Show Result
       </Button>
       <Dialog
         open={open}
         onClose={handleClose}
-        aria-labelledby='alert-dialog-title'
-        aria-describedby='alert-dialog-description'
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id='alert-dialog-title'>
-          {'Your result of tthe quiz is  '}
+        <DialogTitle id="alert-dialog-title">
+          {"Your result of tthe quiz is  "}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id='alert-dialog-description'>
+          <DialogContentText id="alert-dialog-description">
             <p>Correct Answered : {result.payload.countCorrect}</p>
             <p>Total Question : {result.payload.maxQuestions}</p>
             <p>Your Score : {result.payload.score}</p>
@@ -47,7 +47,7 @@ function ResultModle({ result }) {
         </DialogActions>
       </Dialog>
     </div>
-  );
+  )
 }
 
-export default ResultModle;
+export default ResultModle

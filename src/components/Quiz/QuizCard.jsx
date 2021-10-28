@@ -1,21 +1,10 @@
-import "./QuizCard.css";
-import axios from "axios";
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import moment from "moment";
-// moment.tz.add(
-//   "Asia/Calcutta|HMT BURT IST IST|-5R.k -6u -5u -6u|01232|-18LFR.k 1unn.k HB0 7zX0"
-// );
-// moment.tz.link("Asia/Calcutta|Asia/Kolkata");
+import "./QuizCard.css"
+
+import React from "react"
+import { Link } from "react-router-dom"
+import moment from "moment"
+
 function quizCard(props) {
-  console.log(props.quizDetail);
-
-  //const thisMoment = moment.utc(quizDetail.endDate).format("h:mm");
-  // if (quizDetail)
-  //   console.log(
-  //     moment.utcOffset(quizDetail.endDate).format(" MMMM Do YYYY,h:mm:ss a")
-  //   );
-
   return (
     <>
       {props.quizDetail && (
@@ -88,6 +77,6 @@ function quizCard(props) {
         </div>
       )}
     </>
-  );
+  )
 }
-export default quizCard;
+export default quizCard

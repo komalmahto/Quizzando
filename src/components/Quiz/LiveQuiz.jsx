@@ -1,9 +1,6 @@
-import "./PlayNow.css";
-import React, { useState, useEffect } from "react";
-import { USER_SERVER } from "../../config";
-import QuizCard from "./QuizCard";
-import axios from "axios";
-import CommonFreeClassic from "./CommonFreeClassic";
+import "./PlayNow.css"
+import React from "react"
+import CommonFreeClassic from "./CommonFreeClassic"
 
 function ClassicQuiz() {
   return (
@@ -15,15 +12,7 @@ function ClassicQuiz() {
             {" "}
             Quizando
             <span>
-              L
-              <span class="absoluteicon-container">
-                {/* <img
-                  alt="Quizando Live Icon"
-                  class="liveicon"
-                  src="	https://www.quizando.com/assets/logo_live.png"
-                /> */}
-                i
-              </span>
+              L<span class="absoluteicon-container">i</span>
               ve!
             </span>
           </h1>
@@ -34,7 +23,7 @@ function ClassicQuiz() {
       </div>
       <CommonFreeClassic link="fetch?type=live" />
     </>
-  );
+  )
 }
 
-export default ClassicQuiz;
+export default ClassicQuiz

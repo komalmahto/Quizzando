@@ -28,10 +28,6 @@
   width: 500px;
   height: 200px;
   z-index: 1;
-  /* -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-  -webkit-animation: 20s linear infinite rotate;
-  animation: 20s linear infinite rotate; */
 }
 .category__live {
   height: calc(100% - 8px);

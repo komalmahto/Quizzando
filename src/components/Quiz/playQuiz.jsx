@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 import {
   Button,
   Dialog,
@@ -6,76 +6,72 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from "@mui/material";
-import Question from "../Question";
-import axios from "axios";
-import { Link, useParams } from "react-router-dom";
-import ResultModel from "../ResultModle";
-import music from "../../music.mp3";
-import { useHistory } from "react-router";
-import Leaderboard from "../LeaderBoard/LeaderBoard";
-import Rough from "./QuestionContainer";
+} from "@mui/material"
+import axios from "axios"
+import { useParams } from "react-router-dom"
+import { useHistory } from "react-router"
+import Leaderboard from "../LeaderBoard/LeaderBoard"
+import Rough from "./QuestionContainer"
 function PlayQuiz() {
-  let { quizId } = useParams();
-  const history = useHistory();
-  const [open, setOpen] = useState(false);
+  let { quizId } = useParams()
+  const history = useHistory()
+  const [open, setOpen] = useState(false)
 
   const handleClickOpen = async () => {
-    const URL = ` http://13.233.83.134:8010/common/quiz/end?resultId=${resultId}`;
+    const URL = ` http://13.233.83.134:8010/common/quiz/end?resultId=${resultId}`
     try {
-      const res = await axios.get(URL);
-      console.log(res.data);
-      setResult(res.data);
-      setEnded(true);
+      const res = await axios.get(URL)
+
+      setResult(res.data)
+      setEnded(true)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    history.push("/");
-    setOpen(false);
-  };
+    history.push("/")
+    setOpen(false)
+  }
 
-  const [start, setStart] = useState(false);
-  const [questionIdx, setQuestionIdx] = useState(0);
-  const [questions, setQuestions] = useState([]);
-  const [resultId, setResultId] = useState();
-  const [result, setResult] = useState(null);
-  const [end, setEnded] = useState(false);
+  const [start, setStart] = useState(false)
+  const [questionIdx, setQuestionIdx] = useState(0)
+  const [questions, setQuestions] = useState([])
+  const [resultId, setResultId] = useState()
+  const [result, setResult] = useState(null)
+  const [end, setEnded] = useState(false)
   const handleEnd = async () => {
-    const URL = ` http://13.233.83.134:8010/common/quiz/end?resultId=${resultId}`;
+    const URL = ` http://13.233.83.134:8010/common/quiz/end?resultId=${resultId}`
     try {
-      const res = await axios.get(URL);
-      console.log(res.data);
-      setResult(res.data);
-      setEnded(true);
+      const res = await axios.get(URL)
+
+      setResult(res.data)
+      setEnded(true)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   useEffect(() => {
     const handleStart = async () => {
-      const URL = ` http://13.233.83.134:8010/common/quiz/start?quizId=${quizId}`;
+      const URL = ` http://13.233.83.134:8010/common/quiz/start?quizId=${quizId}`
 
       try {
-        const res = await axios.get(URL);
-        console.log(res.data);
-        const Questions = res.data.payload.questions;
-        const ResultId = res.data.payload.resultId;
-        //console.log(Questions, ResultId);
-        setQuestions(Questions);
-        setStart(true);
-        setResultId(ResultId);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+        const res = await axios.get(URL)
 
-    handleStart();
-  }, []);
+        const Questions = res.data.payload.questions
+        const ResultId = res.data.payload.resultId
+        setQuestions(Questions)
+        setStart(true)
+        setResultId(ResultId)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    handleStart()
+  }, [])
 
   return (
     <>
@@ -150,7 +146,7 @@ function PlayQuiz() {
         </Dialog>
       ) : null}
     </>
-  );
+  )
 }
 
-export default PlayQuiz;
+export default PlayQuiz
