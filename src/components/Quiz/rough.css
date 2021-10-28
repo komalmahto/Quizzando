@@ -237,13 +237,13 @@ button:disabled {
   color: #fff;
   margin-bottom: 0;
 }
-p {
+/* p {
   display: block;
   margin-block-start: 1em;
   margin-block-end: 1em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
-}
+} */
 .answer__text {
   background-color: #b3b3b3;
   cursor: pointer;

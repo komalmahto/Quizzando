@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import "./LeaderBoard.css";
+import React, { useEffect, useState } from "react"
+import "./LeaderBoard.css"
 //import "flag-icon-css/css/flag-icon.css";
-import axios from "axios";
+import axios from "axios"
 
-import { USER_SERVER } from "../../config";
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import { USER_SERVER } from "../../config"
+import { styled } from "@mui/material/styles"
+import Table from "@mui/material/Table"
+import TableBody from "@mui/material/TableBody"
+import TableCell, { tableCellClasses } from "@mui/material/TableCell"
+import TableContainer from "@mui/material/TableContainer"
+import TableHead from "@mui/material/TableHead"
+import TableRow from "@mui/material/TableRow"
+import Paper from "@mui/material/Paper"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -21,7 +21,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
   },
-}));
+}))
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -31,10 +31,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:last-child td, &:last-child th": {
     border: 0,
   },
-}));
+}))
 
 function createData(position, name, plays, points) {
-  return { position, name, plays, points };
+  return { position, name, plays, points }
 }
 
 // const rows = [
@@ -46,21 +46,21 @@ function createData(position, name, plays, points) {
 // ];
 
 export default function Leaderboard(props) {
-  const [leaderBoard, setLeaderBoard] = useState("");
+  const [leaderBoard, setLeaderBoard] = useState("")
   useEffect(() => {
     const leaderboard = async () => {
       const leaderData = await axios.get(
         `${USER_SERVER}/quiz/${props.id}/leaderboard`
-      );
-      setLeaderBoard(leaderData.data.payload.result);
-      console.log(leaderData.data.payload);
-    };
-    leaderboard();
-  }, []);
-  let rows = [];
+      )
+      setLeaderBoard(leaderData.data.payload.result)
+      // console.log(leaderData.data.payload);
+    }
+    leaderboard()
+  }, [])
+  let rows = []
   leaderBoard &&
     leaderBoard.map((item, idx) => {
-      console.log(item.score);
+      //console.log(item.score);
       rows &&
         rows.push(
           createData(
@@ -69,10 +69,10 @@ export default function Leaderboard(props) {
             6,
             item.score
           )
-        );
-    });
+        )
+    })
   //console.log(rows[0].points);
-  console.log("yesss");
+  //console.log("yesss")
   return (
     <>
       <div className="leaderboard__title">
@@ -140,7 +140,7 @@ export default function Leaderboard(props) {
               </div>
             ) : (
               ""
-            );
+            )
           })}
         </div>
       </div>
@@ -190,5 +190,5 @@ export default function Leaderboard(props) {
         </TableContainer>
       </div>
     </>
-  );
+  )
 }
