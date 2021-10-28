@@ -1,31 +1,25 @@
-import React, { useContext, useState } from "react";
-import { connect } from "react-redux";
-import { AuthContext } from "../../Context/AuthContext";
+import React, { useContext, useState } from "react"
+import { connect } from "react-redux"
+import { AuthContext } from "../../Context/AuthContext"
 
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Grid";
-import { styled } from "@mui/material/styles";
-import "./MyAccount.css";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import CameraEnhanceIcon from "@mui/icons-material/CameraEnhance";
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+import Paper from "@mui/material/Paper"
+import Stack from "@mui/material/Stack"
+import Grid from "@mui/material/Grid"
+import { styled } from "@mui/material/styles"
+import "./MyAccount.css"
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn"
+import CameraEnhanceIcon from "@mui/icons-material/CameraEnhance"
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet"
 
 function MyAccount() {
-  const { user } = useContext(AuthContext);
-  console.log(user.user);
+  const { user } = useContext(AuthContext)
+  console.log(user.user)
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: "center",
     color: theme.palette.text.secondary,
-  }));
+  }))
   return (
     <div>
       <div className="header__wrapper">
@@ -172,7 +166,7 @@ function MyAccount() {
         </Grid>
       </div>
     </div>
-  );
+  )
 }
 
-export default MyAccount;
+export default MyAccount
