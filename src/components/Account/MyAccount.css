@@ -1,0 +1,196 @@
+.my__account {
+  width: 60%;
+  margin: 0 auto;
+
+  color: #4d4d4d;
+}
+.player__account__heading {
+  font-family: "Paytone One", sans-serif;
+  font-size: 1.8em;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: left;
+  color: #4d4d4d;
+}
+.my__account_ul {
+  font-size: 1.5em;
+  padding: 0 !important;
+  list-style-type: none;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  display: block;
+  cursor: pointer;
+}
+.player__account__p {
+  color: black;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-family: Titillium Web;
+  font-size: 1.4em;
+}
+.player__account__p__detail {
+  color: var(--red);
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-family: Titillium Web;
+  font-size: 1.4em;
+}
+.my__account_li:hover {
+  color: var(--yellow);
+}
+.my__account_li {
+  font-weight: 400;
+  padding: 0.2em 0;
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+.header__wrapper {
+  background-color: #eee;
+}
+.title__content {
+  margin: 0 auto;
+  text-align: center;
+  padding: 5px;
+}
+.user__info {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.user__img {
+  width: 4em;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #fff;
+  margin: 0 10px;
+}
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+.user__img .user__info .title__content {
+  margin-right: 15px;
+  width: 35px;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 1px rgb(0 0 0 / 30%);
+}
+.title {
+  font-family: "Paytone One", sans-serif;
+  font-size: 28px;
+  font-weight: 300;
+  margin: 0;
+  line-height: 1em;
+  text-shadow: 0 2px 1px rgb(0 0 0 / 30%);
+  color: #4d4d4d;
+}
+.my__account__stack {
+  margin: 0 auto;
+  width: 50%;
+}
+.outer__account__picture {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+.account__picture {
+  background-color: #fff;
+  align-self: flex-start;
+  text-align: center;
+  color: #ff3f5f;
+  font-size: 1.2em;
+  border-radius: 2px;
+  justify-content: flex-end;
+}
+.account__picture__container {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  width: 130px;
+  height: 130px;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+  margin: 0.5em 1em;
+}
+.picture__account {
+  align-self: center;
+  margin: 5px 10px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  vertical-align: middle;
+  border-style: none;
+}
+.botton_header_profile {
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.username__profile {
+  background: #29a1d8;
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 400;
+  padding: 5px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+.camera__icon {
+  display: inline-block;
+  width: 20px;
+  height: 18px;
+
+  margin-right: 5px;
+  vertical-align: bottom;
+}
+.funds__section {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #eee;
+}
+.quiz__balance {
+  display: inline-block;
+  padding: 10px;
+  color: #4d4d4d;
+}
+.amount {
+  font-size: 2.6em !important;
+  font-weight: 400 !important;
+  font-family: "Paytone One", sans-serif;
+  margin: 0;
+}
+.token__icon {
+  display: inline-block;
+  color: var(--yellow);
+}
+.buy__token__button {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  font-size: 18px !important;
+
+  font-family: "Paytone One", sans-serif;
+  background: var(--cyan);
+  color: #fff;
+  border-radius: 0.3em;
+
+  font-weight: 400;
+  display: inline-block;
+
+  border: 1px solid transparent;
+}
+.bottom__title__token {
+  font-size: 1.4em !important;
+  font-family: Titillium Webn !important;
+}

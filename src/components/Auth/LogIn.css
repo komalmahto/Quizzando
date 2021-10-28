@@ -1,0 +1,104 @@
+.css-1p5q5e5-MuiStack-root {
+  width: 100%;
+}
+.signin__button {
+  margin: 10px !important;
+}
+.header__wrapper {
+  background-color: #eee;
+  padding: 10px 0 20px 0;
+  margin-bottom: 40px;
+}
+.heading {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  color: #333;
+}
+.quiz__icon {
+  display: inline-block;
+  padding: 0;
+  margin-right: 10px;
+}
+.header__title {
+  font-family: borisblackbloxxregular, sans-serif;
+  font-size: 4rem;
+  margin-bottom: 0;
+}
+.SignupInput {
+  max-width: 60em;
+  margin: 3em auto 100px;
+  padding: 20px;
+  box-shadow: 0 15px 5px -12px rgb(0 0 0 / 30%);
+  border-radius: 10px;
+}
+.signupButton {
+  padding: 7px !important;
+  font-weight: 800 !important;
+}
+.signin__button {
+  width: 100%;
+  font-family: "Paytone One", sans-serif;
+  font-size: 2.4em !important;
+  font-weight: 800 !important;
+  margin-top: 0.5em !important;
+  color: white !important;
+}
+.h5__title {
+  font-weight: 800;
+}
+
+.signupContainer {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.signupWrapper {
+  text-align: center;
+}
+
+.signupHeading {
+  height: 6rem;
+}
+.heading {
+  height: 4rem;
+  background-color: #eeeeee;
+}
+.SignupInput {
+  width: 40%;
+  margin: 0 auto;
+  background-color: #eeeeee;
+  padding: 2% 2.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.facebook {
+  color: white !important;
+}
+
+.twitter {
+}
+.ASKGAMBLERS {
+}
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.outbuttonContainer {
+  margin-bottom: 10px;
+}
+.signupButton {
+  margin: 3px !important;
+}
+
+@media only screen and (max-width: 700px) {
+  .SignupInput {
+    width: 90%;
+  }
+}

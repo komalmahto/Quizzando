@@ -1,0 +1,13 @@
+.games__cards {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  margin-top: 4rem;
+}
+@media screen and (max-width: 992px) {
+  .games__cards {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+  }
+}

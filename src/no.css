@@ -1,0 +1,26 @@
+.article-container {
+  border: 1px solid #000000;
+  overflow: hidden;
+  position: relative;
+  margin: 10px;
+  transition: all 1.5s;
+}
+.article-container:hover {
+  transform: scale(1.09);
+}
+.article-img-holder {
+  background: url(https://awik.io/demo/background-image-zoom/traffic2.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 400px;
+  background-repeat: no-repeat;
+  transition: all 1.5s;
+}
+
+.article-img-holder:hover {
+  transform: scale(1.09);
+}
+.article {
+  width: 80%;
+  margin: 0 auto;
+}

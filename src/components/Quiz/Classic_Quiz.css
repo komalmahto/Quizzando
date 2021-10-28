@@ -1,0 +1,43 @@
+.header-wrapper .info-text-con {
+  padding: 25px 0;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--dark);
+}
+.header-wrapper .info-text-con .title.--icon {
+  margin-top: 0.5em;
+}
+.header-wrapper .info-text-con .title {
+  font-family: "Paytone One", sans-serif;
+  font-size: 3.6em;
+  margin-bottom: 0;
+}
+.header-wrapper .info-text-con .title .absoluteicon-container {
+  position: relative;
+}
+.header-wrapper .info-text-con .title span {
+  color: var(--red);
+  margin-left: 2px;
+  font-family: "Paytone One", sans-serif;
+}
+.header-wrapper .info-text-con .title .absoluteicon-container img.classicsicon {
+  top: -18px;
+  left: -5px;
+}
+.header-wrapper .info-text-con .title .absoluteicon-container img {
+  position: absolute;
+}
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+.header-wrapper .info-text-con .text {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 400;
+  color: var(--dark);
+  font-size: 1.6em;
+  margin: 2px 0;
+  line-height: 1.2em;
+}

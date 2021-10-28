@@ -1,0 +1,367 @@
+.gradient__cont {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: 0 8px 8px -6px rgb(0 0 0 / 60%);
+  overflow: hidden;
+  position: relative;
+  padding: 3px 0;
+}
+.gradient {
+  background: linear-gradient(
+    to right,
+    rgb(255, 63, 95),
+    rgb(255, 63, 95),
+    white,
+    rgb(255, 63, 95),
+    rgb(255, 63, 95),
+    white,
+    rgb(255, 63, 95),
+    rgb(255, 63, 95)
+  );
+  width: 500px;
+  height: 200px;
+  z-index: 1;
+  /* -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-animation: 20s linear infinite rotate;
+  animation: 20s linear infinite rotate; */
+}
+.category__live {
+  height: calc(100% - 8px);
+  width: calc(100% - 8px);
+  border: 3px solid #fff;
+  z-index: 2;
+  height: 100%;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: flex;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px -6px rgb(0 0 0 / 60%);
+  -webkit-transition: 0.3s;
+  transition: 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: flex;
+}
+.title {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  align-content: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+.title__img {
+  height: 30px;
+  margin-right: 15px;
+  vertical-align: middle;
+}
+.home__content {
+  width: 80%;
+  height: 55vh;
+  margin: 0 auto;
+  display: flex;
+}
+.title__span {
+  line-height: 1.4em !important;
+  font-size: 1.8em;
+  color: #fff;
+  font-family: "Paytone One", sans-serif;
+  margin: 0;
+  line-height: 1.2em;
+  vertical-align: middle;
+}
+.buttons__play {
+  padding: 0 10px;
+  -webkit-box-flex: 0;
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.home__left {
+  margin-top: auto;
+}
+.home__left__image {
+  width: 100%;
+  margin-top: auto;
+  object-fit: contain;
+}
+
+.home__right {
+  color: white;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.home__right > h1 {
+  font-size: 30px;
+  font-weight: 700;
+  font-family: "Paytone One", sans-serif;
+}
+.home__right > p {
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+.home__top__btn {
+  background-color: var(--cyan);
+  color: white;
+  font-weight: 800;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  width: fit-content;
+  font-size: 15px;
+  font-family: "Paytone One", sans-serif;
+}
+.home__top__btn:hover {
+  cursor: pointer;
+  background-color: white;
+  color: var(--blue);
+}
+
+.home__bottom {
+  background: linear-gradient(#362550, #100029);
+  color: white;
+  text-align: center;
+  padding: 5px;
+}
+.money__won {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+.home__bottom > h1 {
+  color: var(--red);
+  font-weight: 700;
+  font-size: 35px;
+
+  font-family: "Paytone One", sans-serif;
+  color: #ff3f5f;
+  margin-bottom: 15px;
+  text-shadow: 0 2px 2px rgb(0 0 0 / 50%);
+}
+.money__img {
+  height: 80px;
+  width: 80px;
+  padding-bottom: 10px;
+}
+
+.money__won > h2 {
+  font-size: 28px;
+  font-weight: 900;
+  font-family: "Paytone One", sans-serif !important;
+}
+
+@media screen and (max-width: 993px) {
+  .home__content {
+    height: 65vh;
+    display: flex;
+  }
+  .home__right {
+    width: 100%;
+  }
+
+  .home__bottom > h1 {
+    font-weight: 700;
+    font-size: 30px;
+  }
+}
+@media screen and (max-width: 772px) {
+  .home__right {
+    width: 100%;
+  }
+  .home__right > h1 {
+    font-size: 25px;
+    font-weight: 700;
+  }
+  .home__right > p {
+    margin: 5px 0;
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 640px) {
+  .home__content {
+    width: 95%;
+    height: 50vh;
+    margin: 0 auto;
+  }
+  .home__left {
+    margin-top: auto;
+    width: fit-content;
+  }
+  .home__left__image {
+    width: 90%;
+    margin-top: auto;
+    object-fit: contain;
+  }
+  .home__right > h1 {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .home__bottom > h1 {
+    font-size: 25px;
+  }
+  .money__won > h2 {
+    margin: 5px 0;
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .home__content {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 95%;
+    height: 70vh;
+    margin: 0 auto;
+  }
+  .home__right {
+    text-align: center;
+    margin-top: 10px;
+  }
+  .home__right > h1 {
+    font-size: 20px;
+  }
+  .home__right > p {
+    font-size: 15px;
+    font-weight: 400;
+  }
+  .home__bottom > h1 {
+    color: var(--red);
+    font-weight: 900;
+    font-size: 22px;
+  }
+  .home__top__btn {
+    margin: auto auto;
+  }
+  .home__left {
+    text-align: center;
+  }
+  .home__left__image {
+    width: 70%;
+    height: 200px;
+  }
+}
+
+@media screen and (max-width: 379px) {
+  .home__left__image {
+    width: 70%;
+    height: 150px;
+  }
+}
+
+.games {
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+.games__btns {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+  padding: 25px 0;
+}
+.games__btns > h3 {
+  flex: 0.33;
+  margin: 0 10px;
+  padding: 15px 0;
+  font-weight: 800;
+  color: white;
+  cursor: pointer;
+  box-shadow: 7px 7px 5px grey;
+  border: 2px solid var(--light);
+  padding: 2px;
+}
+h3:nth-child(1) {
+  background-color: var(--red);
+}
+h3:nth-child(2) {
+  background-color: var(--teal);
+}
+h3:nth-child(3) {
+  background-color: var(--cyan);
+}
+
+h3 > img {
+  height: 40px;
+  width: 40px;
+  margin-right: 5px;
+}
+.games__cards {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  margin-top: 4rem;
+}
+@media screen and (max-width: 992px) {
+  .games {
+    width: 98%;
+  }
+  .games__cards {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+  }
+}
+
+@media screen and (max-width: 379px) {
+  .games__btns {
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+  }
+}
+@media screen and (max-width: 327px) {
+  .games__btns {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .games__btns > h3 {
+    flex: 0.33;
+    font-size: 20px;
+    margin: 0 2px;
+    padding: 5px 0;
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+  }
+}
+.home_section_title {
+  width: 100%;
+  max-width: 1120px;
+  margin: 10px auto;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+.quiz__all {
+  font-family: "Paytone One", sans-serif;
+  font-size: 22px;
+  color: #333;
+  margin: 0;
+}
