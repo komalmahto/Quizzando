@@ -7,7 +7,11 @@ import axios from "axios"
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded"
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded"
 import { Link } from "react-router-dom"
+import { useContext } from "react"
+import { AuthContext } from "../Context/AuthContext"
 function RegisterQuiz() {
+  const { user } = useContext(AuthContext)
+  console.log(user?.token)
   let { quizId } = useParams()
   let history = useHistory()
 
@@ -15,13 +19,21 @@ function RegisterQuiz() {
     history.goBack()
   }
   useEffect(() => {
-    const fetch = async () => {
-      const res = await axios.post(
-        `${USER_SERVER}/quiz/register?apiKey=93183bfbec25fe370ee6d69163ca9f1b5c1d57ed1352261007c35c63d32a8e43&quizId=${quizId}`
+    const Fetch = async () => {
+      const res = await fetch(
+        `${USER_SERVER}/quiz/register?apiKey=93183bfbec25fe370ee6d69163ca9f1b5c1d57ed1352261007c35c63d32a8e43&quizId=${quizId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }
       )
-      console.log(res.data)
+      const response = await res.json()
+      console.log(response)
     }
-    fetch()
+    Fetch()
   }, [])
 
   return (

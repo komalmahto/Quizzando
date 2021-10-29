@@ -5,8 +5,6 @@ import { Link } from "react-router-dom"
 import moment from "moment"
 
 function quizCard(props) {
-  console.log(props.quizDetail)
-
   return (
     <>
       {props.quizDetail && (

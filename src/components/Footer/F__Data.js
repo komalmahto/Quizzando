@@ -64,6 +64,10 @@ const footer = {
     ],
     [
       {
+        link: "/myaccount",
+        title: "My Account",
+      },
+      {
         link: "/hosts",
         title: "Quizando Partners",
       },
@@ -77,5 +81,5 @@ const footer = {
       },
     ],
   ],
-};
-export default footer;
+}
+export default footer

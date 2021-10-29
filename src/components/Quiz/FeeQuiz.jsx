@@ -6,7 +6,7 @@ import { useContext } from "react"
 
 function FeeQuiz() {
   const { user } = useContext(AuthContext)
-  console.log(user)
+
   return (
     <>
       <div _ngcontent-iqk-c26="" class="header-wrapper --quizzes">

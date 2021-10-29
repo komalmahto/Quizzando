@@ -4,8 +4,16 @@ import { Link } from "react-router-dom"
 import { useHistory } from "react-router"
 import { AuthContext } from "../../Context/AuthContext"
 import "./Navbar.css"
-
+import { makeStyles } from "@material-ui/core/styles"
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn"
+import NotificationsIcon from "@mui/icons-material/Notifications"
+import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined"
+import Badge from "@mui/material/Badge"
+const useStyles = makeStyles((theme) => ({
+  badge: {},
+}))
 export default function Navbar() {
+  const classes = useStyles()
   const [flag, setFlag] = useState(false)
   const { user } = useContext(AuthContext)
   const history = useHistory()
@@ -25,6 +33,7 @@ export default function Navbar() {
     history.push("/login")
     window.location.reload()
   }
+
   return (
     <div className="navbar">
       <div className="navbar__login__separate__block">
@@ -51,9 +60,10 @@ export default function Navbar() {
                 style={{ textDecoration: `none`, color: "white" }}
               >
                 <div className="no">
-                  <h5 onClick={hide}>Login</h5>
+                  <h5 onClick={hide}>Login | </h5>
                 </div>
               </Link>
+
               <Link
                 to="/signup"
                 style={{ textDecoration: `none`, color: "white" }}
@@ -105,7 +115,7 @@ export default function Navbar() {
             })}
           </ul>
 
-          <div className="signup">
+          {/* <div className="signup">
             <select className="dropdown">
               <option>EUR</option>
               <option>USD</option>
@@ -114,25 +124,143 @@ export default function Navbar() {
             <Link to="/profile">
               <AccountCircleIcon className="signup__icon" />
             </Link>
-            {user ? (
-              <h6 onClick={handleLogOut}>Logout</h6>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  style={{ textDecoration: `none`, color: "white" }}
+          </div> */}
+
+          {user ? (
+            <div class="header-user-in">
+              <div class="header-flex">
+                <div class="profile">
+                  <img alt="" src="	https://www.quizando.com/assets/login.png" />
+                  <Link className="profile__right__link" to="/myaccount">
+                    {" "}
+                    komalmahto2k19mc058
+                  </Link>
+                  <Link className="profile__right__link" to="/myaccount">
+                    | My Account
+                  </Link>
+                  <Link className="profile__right__link" onClick={handleLogOut}>
+                    | Log Out
+                  </Link>
+                  <Badge
+                    badgeContent={1}
+                    color="error"
+                    classes={{ badge: classes.badge }}
+                  >
+                    <NotificationsIcon
+                      style={{ color: "var(--yellow)", fontSize: "25px" }}
+                      color="action"
+                      fontSize="large"
+                    />
+                  </Badge>
+                </div>
+                <div class="balance player-balance">
+                  <div class="text">
+                    <MonetizationOnIcon
+                      style={{
+                        color: "var(--yellow",
+                      }}
+                    />
+                    <span
+                      style={{
+                        color: "white",
+                      }}
+                    >
+                      0
+                    </span>
+                    <AccountBalanceWalletOutlinedIcon
+                      fontSize="large"
+                      style={{ color: "var(--light)" }}
+                    />
+
+                    <span
+                      style={{
+                        color: "white",
+                      }}
+                    >
+                      €0{" "}
+                    </span>
+                    <select
+                      style={{
+                        background: "transparent",
+                        color: "var(--light)",
+                        border: "none",
+                      }}
+                      class="currency-select ng-untouched ng-pristine ng-valid"
+                    >
+                      <option value="EUR">EUR</option>
+                      <option value="USD">USD</option>
+                      <option value="GBP">GBP</option>
+                    </select>
+                  </div>
+                  <button
+                    class="btn btn-pink"
+                    routerlink="/buy-tokens"
+                    tabindex="0"
+                    style={{
+                      color: "white",
+                      backgroundColor: "var(--red)",
+                      margin: "2px",
+                      fontSize: "1.4em",
+                      fontfamily: "Titillium Web",
+                    }}
+                  >
+                    Buy Tokens
+                  </button>
+                </div>
+              </div>
+              <div class="d-flex d-lg-none" id="mobile-user-in">
+                <select class="currency-select --in ng-untouched ng-pristine ng-valid">
+                  <option value="EUR">EUR</option>
+                  <option value="USD">USD</option>
+                  <option value="GBP">GBP</option>
+                </select>
+                <a
+                  class="profile mobile-in-item"
+                  routerlink="/myaccount"
+                  href="/myaccount"
                 >
-                  <h6 onClick={hide}>Login</h6>
-                </Link>
-                <Link
-                  to="/signup"
-                  style={{ textDecoration: `none`, color: "white" }}
-                >
-                  <h6 onClick={hide}>Sign Up</h6>
-                </Link>
-              </>
-            )}
-          </div>
+                  <img src="../../assets/login.png" />{" "}
+                  <p>komalmahto2k19mc058</p>
+                </a>
+                <a class="mobile-in-item">
+                  <img src="/assets/token-icon.png" /> <p>0</p>
+                </a>
+                <a class="mobile-in-item">
+                  <img class="--white" src="/assets/wallet-icon.png" />{" "}
+                  <p>€0 </p>
+                </a>
+                <a class="mobile-in-item --bell">
+                  <span
+                    class="bell"
+                    routerlink="/myaccount/notifications"
+                    tabindex="0"
+                  >
+                    <span class="bell-icon"></span>
+                    <span class="bell-count">0</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                style={{ textDecoration: `none`, color: "white" }}
+              >
+                <h6 style={{ fontSize: "14px" }} onClick={hide}>
+                  Login |{" "}
+                </h6>
+              </Link>
+              <Link
+                to="/signup"
+                style={{ textDecoration: `none`, color: "white" }}
+              >
+                <h6 style={{ fontSize: "14px" }} onClick={hide}>
+                  Sign Up
+                </h6>
+              </Link>
+            </>
+          )}
         </div>
       </div>
 

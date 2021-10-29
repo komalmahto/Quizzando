@@ -1,3 +1,93 @@
+.header-user-in {
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+.header-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 14px;
+  color: var(--light);
+}
+
+.profile__right__link {
+  color: white;
+  text-decoration: none;
+  padding: 2px;
+  font-weight: 600 !important;
+}
+.profile__right__link:hover {
+  color: var(--red);
+}
+.bell {
+  cursor: pointer;
+  outline: 0;
+  display: inline-block;
+  position: relative;
+}
+.makeStyles-badge-1.MuiBadge-colorError.MuiBadge-badge.MuiBadge-standard.MuiBadge-anchorOriginTopRightRectangular.css-to4x1n-MuiBadge-badge {
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  min-width: 0;
+  font-size: 1.2rem;
+  right: 2px;
+}
+.bell-count {
+  color: #fff;
+  background: #ff3f5f;
+  border-radius: 50%;
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  position: absolute;
+  top: 0px;
+  right: 1px;
+  text-align: center;
+  line-height: 13px;
+  align-items: center;
+}
+.bell-icon {
+  background: url(https://www.quizando.com/sprite.6ef32407100718b23623.png)-205px -1px /
+    240px 240px;
+  margin-left: 0.2em;
+}
+.balance.player-balance {
+  justify-content: flex-end;
+  z-index: 1000;
+}
+.balance {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 0.4em 0.4em 0.4em 0.8em;
+  width: auto;
+  -webkit-box-flex: 0;
+  flex: none;
+  border-radius: 0.3em;
+  background: #666;
+  min-height: 37px;
+}
+
+.text {
+  font-size: 1.4em;
+
+  align-items: center;
+}
+
+.balance .text span {
+  padding: 0 0.2em;
+}
+
 .navbar {
   margin: 0 !important;
   padding: 0 !important;
@@ -35,7 +125,7 @@
 .navbar__block {
   height: 90px;
   width: 87%;
-  padding-top: 13px;
+  padding-top: 10px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 0.2fr 1fr;

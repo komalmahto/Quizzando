@@ -39,7 +39,6 @@ function Login({ user }) {
   const [field, setField] = useState({})
   const history = useHistory()
   const handleSubmit = async (e) => {
-    console.log(field)
     loginCall(
       {
         username: field.username,
@@ -128,31 +127,32 @@ function Login({ user }) {
               </ThemeProvider>
             </div>
           </div>
-
-          <Stack direction="column" spacing={2}>
-            {[
-              {
-                displayName: " Username",
-                Name: "username",
-              },
-              {
-                displayName: "Password",
-                Name: "password",
-              },
-            ].map((item, val) => {
-              return (
-                <TextField
-                  id="outlined-basic"
-                  label={item.displayName}
-                  fullWidth
-                  name={item.Name}
-                  onChange={handleOnChange}
-                  variant="outlined"
-                  key={val}
-                />
-              )
-            })}
-          </Stack>
+          <div style={{ width: "100%" }}>
+            <Stack direction="column" spacing={2}>
+              {[
+                {
+                  displayName: " Username",
+                  Name: "username",
+                },
+                {
+                  displayName: "Password",
+                  Name: "password",
+                },
+              ].map((item, val) => {
+                return (
+                  <TextField
+                    id="outlined-basic"
+                    label={item.displayName}
+                    fullWidth
+                    name={item.Name}
+                    onChange={handleOnChange}
+                    variant="outlined"
+                    key={val}
+                  />
+                )
+              })}
+            </Stack>
+          </div>
           <p style={{ margin: "1em 0 0 0", fontSize: "1.6em" }}>
             New to Quizando? Click here to{" "}
             <span style={{ color: "var(--cyan)" }}>

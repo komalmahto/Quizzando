@@ -19,7 +19,7 @@ import Home from "./components/Home/Home"
 
 function App() {
   const { user } = useContext(AuthContext)
-
+  console.log(user)
   return (
     <>
       <Navbar />

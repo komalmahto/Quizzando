@@ -43,9 +43,8 @@ function SignUp() {
   const [field, setField] = useState({})
   const history = useHistory()
   const handleSubmit = async (e) => {
-    console.log(field)
     const response = await axios.post(`${USER_SERVER}/signup`, field)
-    console.log(response.data.statusCode)
+
     if (response.data.statusCode === 201) {
       loginCall(
         {

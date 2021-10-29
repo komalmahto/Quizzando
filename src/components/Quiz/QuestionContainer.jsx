@@ -68,7 +68,6 @@ function Rough({
       setTimeout(() => {
         setShow(true)
         update(0)
-        console.log("1")
       }, 14000)
     }
   }, [])
@@ -77,7 +76,7 @@ function Rough({
     setTimeout(function () {
       setNext(false)
       update(0)
-      console.log("2")
+
       setShow(true)
     }, 3000)
   }
@@ -98,31 +97,49 @@ function Rough({
   const handleSelectOption = async (x, type) => {
     setDisable(true)
     const current = countUpRef?.current?.innerHTML
-    console.log(countUpRef?.current?.innerHTML)
+
     let answer = x
     let questionId = question?._id
     let URL
+    console.log(ResultId, question._id, x, current)
     if (setNextQues === true) {
-      URL = `http://13.233.83.134:8010/common/quiz/submitAnswer?resultId=${ResultId}&quesId=${question._id}&answer=${x}&score=${current}`
+      URL = `http://13.233.83.134:8010/quiz/submitAnswer?resultId=${ResultId}&quesId=${question._id}&answer=${x}&score=${current}`
 
       try {
-        const res = await axios.post(URL)
-        setCorrectOption(res.data.payload.correctOption)
-        if (x == res.data.payload.correctOption) {
+        const response = await fetch(URL, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        })
+        const res = await response.json()
+        console.log(res?.payload?.optionMarked, res?.payload?.correctOption)
+        setCorrectOption(res.payload.correctOption)
+        if (res?.payload?.optionMarked == res?.payload?.correctOption) {
           setButton((prev) => ({ ...prev, [type]: "select" }))
           const audioTune = new Audio(correct_answer)
           audioTune.play()
           setPoints(current)
-          setScore(res.data.payload.total)
+          console.log(res)
+          setScore(res.payload.total)
           setClasss("select")
+          setTimeout(() => {
+            next()
+            setQuestionRem(25 - questionIdx - 1)
+            start()
+          }, 3000)
         } else {
           setButton((prev) => ({ ...prev, [type]: "wrong" }))
           const audioTune = new Audio(wrong_answer)
           audioTune.play()
           setClasss("wrong")
+          setTimeout(() => {
+            next()
+            setQuestionRem(25 - questionIdx - 1)
+            start()
+          }, 3000)
         }
-
-        setQuestionRem(25 - questionIdx - 1)
       } catch (error) {
         console.log(error)
       }
@@ -300,7 +317,7 @@ function Rough({
                         </div>
                       </div>
                     </div>
-                    {setNextQues === true ? (
+                    {/* {setNextQues === true ? (
                       <Button
                         variant="contained"
                         onClick={() => {
@@ -313,7 +330,7 @@ function Rough({
                       </Button>
                     ) : (
                       " "
-                    )}
+                    )} */}
                   </>
                 )}
               </div>

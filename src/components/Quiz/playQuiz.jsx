@@ -12,17 +12,28 @@ import { useParams } from "react-router-dom"
 import { useHistory } from "react-router"
 import Leaderboard from "../LeaderBoard/LeaderBoard"
 import Rough from "./QuestionContainer"
-
+import { AuthContext } from "../../Context/AuthContext"
+import { useContext } from "react"
+import { LocalConvenienceStoreOutlined } from "@material-ui/icons"
 function PlayQuiz() {
+  const { user } = useContext(AuthContext)
+  console.log(user.token)
   let { quizId } = useParams()
   const history = useHistory()
   const [open, setOpen] = useState(false)
 
   const handleClickOpen = async () => {
-    const URL = ` http://13.233.83.134:8010/common/quiz/end?resultId=${resultId}`
+    const URL = `http://13.233.83.134:8010/quiz/end?resultId=${resultId}`
     try {
-      const res = await axios.get(URL)
-      console.log(res.data)
+      const response = await fetch(URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`,
+        },
+      })
+      const res = await response.json()
+      console.log(res)
       setResult(res.data)
       setEnded(true)
     } catch (error) {
@@ -44,26 +55,57 @@ function PlayQuiz() {
   const [end, setEnded] = useState(false)
 
   const handleEnd = async () => {
-    const URL = ` http://13.233.83.134:8010/common/quiz/end?resultId=${resultId}`
+    const URL = ` http://13.233.83.134:8010/quiz/end?resultId=${resultId}`
     try {
-      const res = await axios.get(URL)
-      console.log(res.data)
-      setResult(res.data)
+      const res = await fetch(URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`,
+        },
+      })
+      const response = await res.json()
+      setResult(response.data)
       setEnded(true)
     } catch (error) {
       console.log(error)
     }
   }
 
+  // const Fetch = async () => {
+  //   const res = await fetch(
+  //     `${USER_SERVER}/quiz/register?apiKey=93183bfbec25fe370ee6d69163ca9f1b5c1d57ed1352261007c35c63d32a8e43&quizId=${quizId}`,
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${user?.token}`,
+  //       },
+  //     }
+  //   )
+  //   const response = await res.json()
+  //   console.log(response)
+  // }
+  // Fetch()
+
   useEffect(() => {
     const handleStart = async () => {
-      const URL = ` http://13.233.83.134:8010/common/quiz/start?quizId=${quizId}`
+      const URL = ` http://13.233.83.134:8010/quiz/start?quizId=${quizId}`
 
       try {
-        const res = await axios.get(URL)
-        console.log(res.data)
-        const Questions = res.data.payload.questions
-        const ResultId = res.data.payload.resultId
+        const response = await fetch(URL, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        })
+        const res = await response.json()
+        console.log(res)
+        console.log("startdata")
+        console.log(res.payload.data.questions)
+        const Questions = res?.payload?.data?.questions
+        const ResultId = res?.payload?.data?.resultId
 
         setQuestions(Questions)
         setStart(true)
@@ -136,9 +178,9 @@ function PlayQuiz() {
           </DialogTitle>
           <DialogContent style={{ height: "400px", width: "400px" }}>
             <DialogContentText id="alert-dialog-description">
-              <p>Correct Answered : {result.payload.countCorrect}</p>
+              {/* <p>Correct Answered : {result.payload.countCorrect}</p>
               <p>Total Question : {result.payload.maxQuestions}</p>
-              <p>Your Score : {result.payload.score}</p>
+              <p>Your Score : {result.payload.score}</p> */}
             </DialogContentText>
           </DialogContent>
           <DialogActions>

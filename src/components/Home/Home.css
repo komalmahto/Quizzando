@@ -301,13 +301,13 @@
   border: 2px solid var(--light);
   padding: 2px;
 }
-h3:nth-child(1) {
+.games__red_button {
   background-color: var(--red);
 }
-h3:nth-child(2) {
+.games__green_button {
   background-color: var(--teal);
 }
-h3:nth-child(3) {
+.games__cyan_button {
   background-color: var(--cyan);
 }
 

@@ -81,7 +81,6 @@
 }
 .card > h2 {
   text-align: center;
-  /* Will be red because of :root's higher specificity */
   font-size: 25px;
   font-weight: 700;
 }

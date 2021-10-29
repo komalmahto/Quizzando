@@ -14,7 +14,6 @@ import {
 } from "@mui/material"
 function StartQuiz(props) {
   let { quizId } = useParams()
-  console.log(quizId)
 
   const [open, setOpen] = useState(false)
 
@@ -26,7 +25,7 @@ function StartQuiz(props) {
     setOpen(false)
   }
   useEffect(() => {}, [])
-  console.log(props)
+
   return (
     <div>
       <div className="outer_game_div"></div>

@@ -62,19 +62,19 @@ export default function Home() {
       </div>
 
       <div className="games__btns">
-        <h3>
+        <h3 className="games__red_button">
           <img alt="" src="https://www.quizando.com/assets/svg/live_icon.svg" />
           Live!
         </h3>
 
-        <h3>
+        <h3 className="games__green_button">
           <img
             alt=""
             src="https://www.quizando.com/assets/svg/notokens_icon.svg"
           />
           Free Games
         </h3>
-        <h3>
+        <h3 className="games__cyan_button">
           <img
             alt=""
             src="https://www.quizando.com/assets/svg/classics_icon.svg"
