@@ -3,7 +3,11 @@ import { Link, useParams } from "react-router-dom"
 import { connect, useSelector } from "react-redux"
 import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite"
 import "./StartQuiz.css"
+import { AuthContext } from "../../Context/AuthContext"
+import { useContext } from "react"
+import { useHistory } from "react-router"
 import Leaderboard from "../LeaderBoard/LeaderBoard"
+import Not_auth from "../../NoAuth"
 import {
   Button,
   Dialog,
@@ -13,8 +17,11 @@ import {
   DialogTitle,
 } from "@mui/material"
 function StartQuiz(props) {
+  const { user } = useContext(AuthContext)
+  console.log(user.token)
+  const history = useHistory()
   let { quizId } = useParams()
-
+  const [timePlayed, setTimePlayed] = useState(0)
   const [open, setOpen] = useState(false)
 
   const handleClickOpen = () => {
@@ -24,7 +31,36 @@ function StartQuiz(props) {
   const handleClose = () => {
     setOpen(false)
   }
-  useEffect(() => {}, [])
+  const handlePlayQuiz = async () => {
+    const URL = ` http://13.233.83.134:8010/quiz/start?quizId=${quizId}`
+
+    try {
+      const response = await fetch(URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`,
+        },
+      })
+      const res = await response.json()
+      console.log(res)
+      if (user && res.statusCode === 201) {
+        history.push(`/playQuiz/classic/confirm/${quizId}`)
+      } else if (
+        user &&
+        res.statusCode === 400 &&
+        res.message === "LIMITEXCEEDED"
+      ) {
+        history.push(`/${quizId}/limitexceeded`)
+      } else if (res.statusCode === 400 && res.message === "NOTREGISTERED") {
+        history.push(`/playQuiz/${quizId}/notauthorised`)
+      } else {
+        history.push(`/playQuiz/classic/${quizId}`)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div>
@@ -51,7 +87,7 @@ function StartQuiz(props) {
           </div>
         </div>
 
-        {props.freeQuiz === "true" && props.freeQuiz === "true" ? (
+        {props.liveQuiz === true ? (
           <Link
             to={`/playQuiz/live/${quizId}`}
             style={{ textDecoration: "none" }}
@@ -77,7 +113,7 @@ function StartQuiz(props) {
               </span>
             </button>
           </Link>
-        ) : props.freeQuiz === "true" ? (
+        ) : props.freeQuiz === true ? (
           <Link
             to={`/playQuiz/free/${quizId}`}
             style={{ textDecoration: "none" }}
@@ -104,31 +140,26 @@ function StartQuiz(props) {
             </button>
           </Link>
         ) : (
-          <Link
-            to={`/playQuiz/classic/confirm/${quizId}`}
-            style={{ textDecoration: "none" }}
-          >
-            <button className="play_quiz_button">
-              <span className="">
-                <PlayCircleFilledWhiteIcon
-                  style={{
-                    width: "57px",
-                    height: "57px",
-                    backgroundPosition: "56px 56px",
+          <button onClick={handlePlayQuiz} className="play_quiz_button">
+            <span className="">
+              <PlayCircleFilledWhiteIcon
+                style={{
+                  width: "57px",
+                  height: "57px",
+                  backgroundPosition: "56px 56px",
 
-                    display: "inline-block",
-                    marginRight: "10px",
-                    verticalAlign: "middle",
-                  }}
-                  className="icon_button_play_quiz"
-                />
-              </span>
-              <span className="text_play_quiz">
-                Play Quiz!{" "}
-                <span className="text_token_play_quiz">No Tokens Needed</span>
-              </span>
-            </button>
-          </Link>
+                  display: "inline-block",
+                  marginRight: "10px",
+                  verticalAlign: "middle",
+                }}
+                className="icon_button_play_quiz"
+              />
+            </span>
+            <span className="text_play_quiz">
+              Play Quiz!{" "}
+              <span className="text_token_play_quiz">No Tokens Needed</span>
+            </span>
+          </button>
         )}
 
         {/* <Link to="/playQuiz" style={{ textDecoration: "none" }}>

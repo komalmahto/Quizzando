@@ -85,9 +85,9 @@ export default function Home() {
       <div className="home_section_title">
         <h2 className="quiz__all">All Quizes</h2>
       </div>
-      <FreeQuiz />
+      {/* <FreeQuiz />
       <LiveQuiz />
-      <ClassicQuiz />
+      <ClassicQuiz /> */}
     </>
   )
 }

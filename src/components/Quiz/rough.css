@@ -1,3 +1,54 @@
+.main {
+  top: 50%;
+  left: 50%;
+  display: flex;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.main div {
+  margin: 10px;
+  width: 30px;
+  height: 30px;
+
+  border-radius: 50%;
+  animation-duration: 0.8s;
+  animation-iteration-count: infinite;
+}
+
+.one_load {
+  animation-name: load-one;
+  background-color: var(--cyan);
+}
+
+@keyframes load-one {
+  30% {
+    transform: translateY(-50%);
+  }
+}
+
+.two_load {
+  animation-name: load-two;
+  background-color: var(--yellow);
+}
+
+@keyframes load-two {
+  50% {
+    transform: translateY(-50%);
+  }
+}
+
+.three_load {
+  animation-name: load-three;
+  background-color: var(--red);
+}
+
+@keyframes load-three {
+  70% {
+    transform: translateY(-50%);
+  }
+}
+
 .red {
   background-color: red;
 }
@@ -692,6 +743,35 @@ h3 {
   color: var(--light);
 }
 @keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.bounce-in-live {
+  animation: bounce-in-live 0s ease infinite;
+}
+
+.bounce-in-text-live {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 500px;
+  font-weight: 800;
+  font-family: "Paytone One", sans-serif;
+  color: var(--light);
+}
+@keyframes bounce-in-live {
   0% {
     opacity: 0;
     transform: scale(0.3);

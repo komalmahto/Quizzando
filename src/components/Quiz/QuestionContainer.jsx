@@ -13,9 +13,11 @@ import radial from "../../radial_ray2.mp4"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import { useContext } from "react"
 import { AuthContext } from "../../Context/AuthContext"
-import io from "socket.io-client"
-var socket = io("ws://13.233.83.134:8080/", { transports: ["websocket"] })
-
+const startTime = []
+const endTime = []
+// import io from "socket.io-client"
+// var socket = io("ws://13.233.83.134:8080/", { transports: ["websocket"] })
+let current
 const useAudio = (url, userToken) => {
   const [audio] = useState(new Audio(url))
   const [playing, setPlaying] = useState(userToken)
@@ -41,8 +43,15 @@ function Rough({
   setQuestionIdx,
   questionIdx,
   setNextQues,
+  socket,
+  correct,
+  showLoader,
+  setNewQuestion,
+  isLive,
 }) {
+  console.log(question)
   const countUpRef = React.useRef(null)
+  const liveCountUpRef = React.useRef(null)
   let { quizId } = useParams()
   const userToken = JSON.parse(localStorage.getItem("user")) || null
   const { user } = useContext(AuthContext)
@@ -56,6 +65,8 @@ function Rough({
   const [showNext, setNext] = useState(false)
   const [disable, setDisable] = useState(false)
   const [correctOption, setCorrectOption] = useState(null)
+
+  const [live, setLive] = useState(false)
   const [button, setButton] = useState({
     one: "",
     two: "",
@@ -67,15 +78,26 @@ function Rough({
     if (!show && !showNext) {
       setTimeout(() => {
         setShow(true)
-        update(0)
+        if (isLive === false) update(0)
       }, 14000)
     }
   }, [])
-
+  if (!show && !showNext && !live) {
+    var currentdate = new Date()
+    console.log(
+      "start",
+      currentdate.getHours() +
+        ":" +
+        currentdate.getMinutes() +
+        ":" +
+        currentdate.getSeconds()
+    )
+    startTime.push(currentdate.getSeconds() + 14)
+  }
   if (showNext) {
     setTimeout(function () {
       setNext(false)
-      update(0)
+      //update(0)
 
       setShow(true)
     }, 3000)
@@ -93,16 +115,27 @@ function Rough({
     setNext(true)
     setDisable(false)
   }
+  const nextLive = async (e) => {
+    pauseResume()
+    setClasss(null)
+    setButton({ one: "", two: "", three: "", four: "" })
+    setPoints(countUpRef?.current?.innerHTML)
+    setShow(false)
 
+    setDisable(false)
+
+    setLive(true)
+  }
   const handleSelectOption = async (x, type) => {
     setDisable(true)
-    const current = countUpRef?.current?.innerHTML
+    current = countUpRef?.current?.innerHTML
 
     let answer = x
     let questionId = question?._id
     let URL
     console.log(ResultId, question._id, x, current)
     if (setNextQues === true) {
+      console.log("classic")
       URL = `http://13.233.83.134:8010/quiz/submitAnswer?resultId=${ResultId}&quesId=${question._id}&answer=${x}&score=${current}`
 
       try {
@@ -144,31 +177,65 @@ function Rough({
         console.log(error)
       }
     } else {
+      console.log("data")
+      var currentdate = new Date()
       socket.emit("submitAnswer", { userId, roomId, answer, questionId })
+      endTime.push(currentdate.getSeconds())
+      //console.log(data?.isCorrect)
 
-      socket.on("submitAnswerResponse", (data) => {
-        //console.log(data);
-        if (data.isCorrect === true) {
-          //setButton((prev) => ({ ...prev, [type]: "select" }));
-          const audioTune = new Audio(correct_answer)
-          //audioTune.play();
-          setScore((prev) => prev + data.points)
-          //etClasss("select");
-        } else {
-          //setButton((prev) => ({ ...prev, [type]: "wrong" }));
-          const audioTune = new Audio(wrong_answer)
-          //audioTune.play();
-          setScore((prev) => prev + data.points)
-          //setClasss("wrong");
-        }
-      })
+      console.log(
+        "end",
+        currentdate.getHours() +
+          ":" +
+          currentdate.getMinutes() +
+          ":" +
+          currentdate.getSeconds()
+      )
+      console.log(question?.answer, answer)
+
+      if (question?.answer === answer) {
+        setButton((prev) => ({ ...prev, [type]: "select" }))
+        const audioTune = new Audio(correct_answer)
+        audioTune.play()
+
+        setScore((prev) => prev + Number(current))
+        setClasss("select")
+        setTimeout(() => {
+          nextLive()
+          setQuestionRem(25 - questionIdx - 1)
+          start()
+          setNewQuestion(false)
+        }, 3000)
+      } else {
+        setButton((prev) => ({ ...prev, [type]: "wrong" }))
+        const audioTune = new Audio(wrong_answer)
+        audioTune.play()
+        setScore((prev) => prev + 0)
+        setClasss("wrong")
+        setTimeout(() => {
+          nextLive()
+          setQuestionRem(25 - questionIdx - 1)
+          start()
+          setNewQuestion(false)
+        }, 3000)
+      }
+
       // setButton({ one: "", two: "", three: "", four: "" });
       // setClasss(null);
     }
   }
-  const { start, pauseResume, update } = useCountUp({
+
+  useEffect(() => {
+    const HandleTimerLive = () => {
+      if (showLoader === true) {
+        update(0)
+      }
+    }
+    HandleTimerLive()
+  }, [showLoader])
+  const { start, pauseResume, reset, update } = useCountUp({
     ref: countUpRef,
-    duration: 15,
+    duration: 60,
     start: 10000,
     end: 10000,
   })
@@ -179,7 +246,7 @@ function Rough({
         <div className="detail__wrapper">
           <div className="detail__wrapper2">
             <div className="detail__wrapper3">
-              {!show && !showNext ? (
+              {!show && !showNext && !live ? (
                 <div>
                   <video controls width="100%" height="100%" autoPlay={true}>
                     <source src={radial} type="video/mp4" />
@@ -190,21 +257,39 @@ function Rough({
                 ""
               )}
               <div className="answer__section detail__content">
-                {!show && !showNext ? (
+                {!show && !showNext && !live ? (
                   <>
                     <div id="bounce-in" className="bounce-in">
                       <h1 className="bounce-in-text">Get Ready</h1>
                     </div>
                   </>
-                ) : showNext ? (
-                  <div id="bounce-in" className="bounce-in">
-                    <h1 className="bounce-in-text">Next Question</h1>
-                  </div>
-                ) : (
+                ) : showNext === true || showLoader === false ? (
+                  showLoader === false ? (
+                    <div class="main">
+                      <p
+                        style={{
+                          fontSize: "30px",
+                          fontFamily: "Paytone One",
+                          color: "var(--light)",
+                        }}
+                      >
+                        {" "}
+                        Loading Question
+                      </p>
+                      <div className="one_load"></div>
+                      <div className="two_load"></div>
+                      <div class="three_load"></div>
+                    </div>
+                  ) : (
+                    <div id="bounce-in" className="bounce-in">
+                      <h1 className="bounce-in-text">Next Question</h1>
+                    </div>
+                  )
+                ) : showLoader === true ? (
                   <>
                     <p className="question animated dts fadeInDown">
                       <span className="classic__question">
-                        {question.content.question}
+                        {question?.content?.question}
                       </span>
                     </p>
                     <div className="question_image_container">
@@ -213,13 +298,13 @@ function Rough({
                           <button
                             disabled={disable}
                             className={`answer_animated animated flipInX ${button.one}`}
-                            value={question.options[0]._id}
+                            value={question?.options[0]?._id}
                             key={0}
                             onClick={() => {
                               if (disable === false) {
                                 pauseResume()
                                 handleSelectOption(
-                                  question.options[0]._id,
+                                  question?.options[0]._id,
                                   "one"
                                 )
                               }
@@ -231,21 +316,21 @@ function Rough({
                             >
                               <span className={`ng_content ${button.one}`}>
                                 {" "}
-                                {question.options[0].text}
+                                {question?.options[0].text}
                               </span>
                             </p>
                           </button>
                         </div>
                         <div className={`fade-in two `} id="two">
                           <button
-                            value={question.options[1]._id}
+                            value={question?.options[1]._id}
                             key={1}
                             name="two"
                             onClick={() => {
                               if (disable === false) {
                                 pauseResume()
                                 handleSelectOption(
-                                  question.options[1]._id,
+                                  question?.options[1]._id,
                                   "two"
                                 )
                               }
@@ -257,7 +342,7 @@ function Rough({
                               className={`answer__text hoverAnswer ${button.two} `}
                             >
                               <span className={`ng_content ${button.two}`}>
-                                {question.options[1].text}
+                                {question?.options[1].text}
                               </span>
                             </p>
                           </button>
@@ -265,13 +350,13 @@ function Rough({
                         <div className={`fade-in three `} id="three">
                           <button
                             className={`${button.three} answer_animated animated flipInX`}
-                            value={question.options[2]._id}
+                            value={question?.options[2]._id}
                             key={2}
                             onClick={() => {
                               if (disable === false) {
                                 pauseResume()
                                 handleSelectOption(
-                                  question.options[2]._id,
+                                  question?.options[2]._id,
                                   "three"
                                 )
                               }
@@ -283,7 +368,7 @@ function Rough({
                             >
                               <span className={`ng_content ${button.three}`}>
                                 {" "}
-                                {question.options[2].text}
+                                {question?.options[2].text}
                               </span>
                             </p>
                           </button>
@@ -291,14 +376,14 @@ function Rough({
                         <div className={`fade-in four `} id="four">
                           <button
                             className={`${button.four} answer_animated animated flipInX`}
-                            value={question.options[3]._id}
+                            value={question?.options[3]._id}
                             key={3}
                             name="four"
                             onClick={() => {
                               if (disable === false) {
                                 pauseResume()
                                 handleSelectOption(
-                                  question.options[3]._id,
+                                  question?.options[3]._id,
                                   "four"
                                 )
                               }
@@ -310,29 +395,15 @@ function Rough({
                             >
                               <span className={`ng_content ${button.four}`}>
                                 {" "}
-                                {question.options[3].text}
+                                {question?.options[3].text}
                               </span>
                             </p>
                           </button>
                         </div>
                       </div>
                     </div>
-                    {/* {setNextQues === true ? (
-                      <Button
-                        variant="contained"
-                        onClick={() => {
-                          next()
-                          start()
-                        }}
-                        endIcon={<NavigateNextIcon sx={{ color: "#ffff" }} />}
-                      >
-                        Next
-                      </Button>
-                    ) : (
-                      " "
-                    )} */}
                   </>
-                )}
+                ) : null}
               </div>
             </div>
           </div>

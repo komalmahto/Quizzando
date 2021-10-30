@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import moment from "moment"
 
 function quizCard(props) {
+  console.log(props)
   return (
     <>
       {props.quizDetail && (
@@ -37,8 +38,7 @@ function quizCard(props) {
             <h6 style={{ fontSize: "1.8em", fontWeight: "600" }}>
               Special Prizes!{" "}
             </h6>
-            {props.quizDetail?.isFreebie === true &&
-            props.quizDetail?.liveQuiz === true ? (
+            {props.quizDetail?.liveQuiz === true ? (
               <Link
                 className="card__bottom__btn"
                 to={`/start/live/${props.quizDetail?._id}`}

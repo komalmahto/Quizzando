@@ -16,7 +16,8 @@ import RegisterQuiz from "./components/registerQuiz"
 import Live from "./components/Quiz/Live"
 import LiveQuiz from "./components/Quiz/LiveQuiz"
 import Home from "./components/Home/Home"
-
+import LimitExceeded from "./components/Quiz/LimitExceeded"
+import NotRegistered from "./components/Quiz/NotRegistered"
 function App() {
   const { user } = useContext(AuthContext)
   console.log(user)
@@ -35,13 +36,13 @@ function App() {
 
         {/* Start Quiz */}
         <Route path="/start/live/:quizId">
-          <StartQuiz freeQuiz="true" liveQuiz="true" />
+          <StartQuiz liveQuiz={true} />
         </Route>
         <Route path="/start/free/:quizId">
-          <StartQuiz freeQuiz="true" liveQuiz="false" />
+          <StartQuiz freeQuiz={true} />
         </Route>
         <Route path="/start/classic/:quizId">
-          <StartQuiz freeQuiz="false" liveQuiz="false" />
+          <StartQuiz />
         </Route>
 
         {/* Play Quiz */}
@@ -54,13 +55,18 @@ function App() {
         <Route path="/playQuiz/classic/confirm/:quizId">
           {user?.token ? <RegisterQuiz /> : <NotAuth />}
         </Route>
+        <Route path="/playQuiz/:quizId/notauthorised">
+          <NotRegistered />
+        </Route>
         <Route path="/playQuiz/classic/:quizId">
           {user?.token ? <PlayQuiz /> : null}
         </Route>
         <Route path="/myaccount">
           {user?.token ? <MyAccount /> : <NotAuth />}
         </Route>
-
+        <Route path="/:quizId/limitexceeded">
+          {user?.token ? <LimitExceeded /> : <NotAuth />}
+        </Route>
         <Redirect to="/" />
       </Switch>
 
