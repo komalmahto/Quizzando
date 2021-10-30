@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import { connect, useSelector } from "react-redux"
 import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite"
 import "./StartQuiz.css"
 import { AuthContext } from "../../Context/AuthContext"
 import { useContext } from "react"
 import { useHistory } from "react-router"
 import Leaderboard from "../LeaderBoard/LeaderBoard"
-import Not_auth from "../../NoAuth"
+
 import {
   Button,
   Dialog,
@@ -16,12 +15,13 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material"
+
 function StartQuiz(props) {
   const { user } = useContext(AuthContext)
   console.log(user.token)
   const history = useHistory()
   let { quizId } = useParams()
-  const [timePlayed, setTimePlayed] = useState(0)
+
   const [open, setOpen] = useState(false)
 
   const handleClickOpen = () => {
@@ -55,7 +55,7 @@ function StartQuiz(props) {
       } else if (res.statusCode === 400 && res.message === "NOTREGISTERED") {
         history.push(`/playQuiz/${quizId}/notauthorised`)
       } else {
-        history.push(`/playQuiz/classic/${quizId}`)
+        history.push(`/playQuiz/classic/confirm/${quizId}`)
       }
     } catch (error) {
       console.log(error)

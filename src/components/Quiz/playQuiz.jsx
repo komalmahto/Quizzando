@@ -7,15 +7,14 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material"
-import axios from "axios"
+
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router"
 import Leaderboard from "../LeaderBoard/LeaderBoard"
 import QuestionContainer from "./QuizContainer_"
 import { AuthContext } from "../../Context/AuthContext"
 import { useContext } from "react"
-import { LocalConvenienceStoreOutlined } from "@material-ui/icons"
-import LimitExceeded from "./LimitExceeded"
+
 function PlayQuiz() {
   const { user } = useContext(AuthContext)
   console.log(user.token)
@@ -54,7 +53,7 @@ function PlayQuiz() {
   const [resultId, setResultId] = useState()
   const [result, setResult] = useState(null)
   const [end, setEnded] = useState(false)
-  const [timePlayed, setTimePlayed] = useState(0)
+
   const handleEnd = async () => {
     const URL = ` http://13.233.83.134:8010/quiz/end?resultId=${resultId}`
     try {
@@ -86,7 +85,7 @@ function PlayQuiz() {
           },
         })
         const res = await response.json()
-        setTimePlayed(res)
+
         if (res.statusCode === 400) {
         } else {
           console.log("startdata")

@@ -8,15 +8,10 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp"
 import VolumeOffIcon from "@mui/icons-material/VolumeOff"
 import wrong_answer from "../../Wrong-answer.mp3"
 import correct_answer from "../../Correct-answer.mp3"
-import axios from "axios"
 import radial from "../../radial_ray2.mp4"
-import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import { useContext } from "react"
 import { AuthContext } from "../../Context/AuthContext"
-const startTime = []
-const endTime = []
-// import io from "socket.io-client"
-// var socket = io("ws://13.233.83.134:8080/", { transports: ["websocket"] })
+
 let current
 const useAudio = (url, userToken) => {
   const [audio] = useState(new Audio(url))
@@ -37,24 +32,24 @@ const useAudio = (url, userToken) => {
 
   return [playing, toggle]
 }
+
 function Rough({
   question,
-  ResultId,
-  setQuestionIdx,
   questionIdx,
   setNextQues,
   socket,
-  correct,
   showLoader,
   setNewQuestion,
   isLive,
 }) {
   console.log(question)
   const countUpRef = React.useRef(null)
-  const liveCountUpRef = React.useRef(null)
+
   let { quizId } = useParams()
   const userToken = JSON.parse(localStorage.getItem("user")) || null
   const { user } = useContext(AuthContext)
+  let userId = user?.user._id
+  let roomId = quizId
 
   const [playing, toggle] = useAudio(music, userToken)
   const [score, setScore] = useState(0)
@@ -64,8 +59,6 @@ function Rough({
   const [show, setShow] = useState(false)
   const [showNext, setNext] = useState(false)
   const [disable, setDisable] = useState(false)
-  const [correctOption, setCorrectOption] = useState(null)
-
   const [live, setLive] = useState(false)
   const [button, setButton] = useState({
     one: "",
@@ -82,116 +75,38 @@ function Rough({
       }, 14000)
     }
   }, [])
-  if (!show && !showNext && !live) {
-    var currentdate = new Date()
-    console.log(
-      "start",
-      currentdate.getHours() +
-        ":" +
-        currentdate.getMinutes() +
-        ":" +
-        currentdate.getSeconds()
-    )
-    startTime.push(currentdate.getSeconds() + 14)
-  }
-  if (showNext) {
-    setTimeout(function () {
-      setNext(false)
-      //update(0)
 
-      setShow(true)
-    }, 3000)
-  }
+  useEffect(() => {
+    const HandleTimerLive = () => {
+      if (showLoader === true) {
+        update(0)
+      }
+    }
+    HandleTimerLive()
+  }, [showLoader])
 
-  let userId = user?.user._id
-  let roomId = quizId
-
-  const next = async (e) => {
-    setClasss(null)
-    setButton({ one: "", two: "", three: "", four: "" })
-    setQuestionIdx((prev) => ++prev)
-    setPoints(countUpRef?.current?.innerHTML)
-    setShow(false)
-    setNext(true)
-    setDisable(false)
-  }
   const nextLive = async (e) => {
     pauseResume()
     setClasss(null)
     setButton({ one: "", two: "", three: "", four: "" })
     setPoints(countUpRef?.current?.innerHTML)
     setShow(false)
-
     setDisable(false)
-
     setLive(true)
   }
+
   const handleSelectOption = async (x, type) => {
     setDisable(true)
     current = countUpRef?.current?.innerHTML
-
     let answer = x
     let questionId = question?._id
-    let URL
-    console.log(ResultId, question._id, x, current)
-    if (setNextQues === true) {
-      console.log("classic")
-      URL = `http://13.233.83.134:8010/quiz/submitAnswer?resultId=${ResultId}&quesId=${question._id}&answer=${x}&score=${current}`
+    console.log(question._id, x, current)
 
-      try {
-        const response = await fetch(URL, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user?.token}`,
-          },
-        })
-        const res = await response.json()
-        console.log(res?.payload?.optionMarked, res?.payload?.correctOption)
-        setCorrectOption(res.payload.correctOption)
-        if (res?.payload?.optionMarked == res?.payload?.correctOption) {
-          setButton((prev) => ({ ...prev, [type]: "select" }))
-          const audioTune = new Audio(correct_answer)
-          audioTune.play()
-          setPoints(current)
-          console.log(res)
-          setScore(res.payload.total)
-          setClasss("select")
-          setTimeout(() => {
-            next()
-            setQuestionRem(25 - questionIdx - 1)
-            start()
-          }, 3000)
-        } else {
-          setButton((prev) => ({ ...prev, [type]: "wrong" }))
-          const audioTune = new Audio(wrong_answer)
-          audioTune.play()
-          setClasss("wrong")
-          setTimeout(() => {
-            next()
-            setQuestionRem(25 - questionIdx - 1)
-            start()
-          }, 3000)
-        }
-      } catch (error) {
-        console.log(error)
-      }
+    if (setNextQues === true) {
     } else {
       console.log("data")
-      var currentdate = new Date()
-      socket.emit("submitAnswer", { userId, roomId, answer, questionId })
-      endTime.push(currentdate.getSeconds())
-      //console.log(data?.isCorrect)
 
-      console.log(
-        "end",
-        currentdate.getHours() +
-          ":" +
-          currentdate.getMinutes() +
-          ":" +
-          currentdate.getSeconds()
-      )
-      console.log(question?.answer, answer)
+      socket.emit("submitAnswer", { userId, roomId, answer, questionId })
 
       if (question?.answer === answer) {
         setButton((prev) => ({ ...prev, [type]: "select" }))
@@ -219,21 +134,10 @@ function Rough({
           setNewQuestion(false)
         }, 3000)
       }
-
-      // setButton({ one: "", two: "", three: "", four: "" });
-      // setClasss(null);
     }
   }
 
-  useEffect(() => {
-    const HandleTimerLive = () => {
-      if (showLoader === true) {
-        update(0)
-      }
-    }
-    HandleTimerLive()
-  }, [showLoader])
-  const { start, pauseResume, reset, update } = useCountUp({
+  const { start, pauseResume, update } = useCountUp({
     ref: countUpRef,
     duration: 60,
     start: 10000,

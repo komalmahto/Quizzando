@@ -3,18 +3,13 @@ import "./rough.css"
 import { Button } from "@mui/material"
 import { useCountUp } from "react-countup"
 import music from "../../music.mp3"
-import { useParams } from "react-router-dom"
 import VolumeUpIcon from "@mui/icons-material/VolumeUp"
 import VolumeOffIcon from "@mui/icons-material/VolumeOff"
 import wrong_answer from "../../Wrong-answer.mp3"
 import correct_answer from "../../Correct-answer.mp3"
-import axios from "axios"
 import radial from "../../radial_ray2.mp4"
-import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import { useContext } from "react"
 import { AuthContext } from "../../Context/AuthContext"
-import io from "socket.io-client"
-var socket = io("ws://13.233.83.134:8080/", { transports: ["websocket"] })
 
 const useAudio = (url, userToken) => {
   const [audio] = useState(new Audio(url))
@@ -43,7 +38,7 @@ function Rough({
   setNextQues,
 }) {
   const countUpRef = React.useRef(null)
-  let { quizId } = useParams()
+
   const userToken = JSON.parse(localStorage.getItem("user")) || null
   const { user } = useContext(AuthContext)
 
@@ -81,9 +76,6 @@ function Rough({
     }, 3000)
   }
 
-  let userId = user?.user._id
-  let roomId = quizId
-
   const next = async (e) => {
     setClasss(null)
     setButton({ one: "", two: "", three: "", four: "" })
@@ -98,8 +90,6 @@ function Rough({
     setDisable(true)
     const current = countUpRef?.current?.innerHTML
 
-    let answer = x
-    let questionId = question?._id
     let URL
     console.log(ResultId, question._id, x, current)
     if (setNextQues === true) {
@@ -143,27 +133,6 @@ function Rough({
       } catch (error) {
         console.log(error)
       }
-    } else {
-      socket.emit("submitAnswer", { userId, roomId, answer, questionId })
-
-      socket.on("submitAnswerResponse", (data) => {
-        //console.log(data);
-        if (data.isCorrect === true) {
-          //setButton((prev) => ({ ...prev, [type]: "select" }));
-          const audioTune = new Audio(correct_answer)
-          //audioTune.play();
-          setScore((prev) => prev + data.points)
-          //etClasss("select");
-        } else {
-          //setButton((prev) => ({ ...prev, [type]: "wrong" }));
-          const audioTune = new Audio(wrong_answer)
-          //audioTune.play();
-          setScore((prev) => prev + data.points)
-          //setClasss("wrong");
-        }
-      })
-      // setButton({ one: "", two: "", three: "", four: "" });
-      // setClasss(null);
     }
   }
   const { start, pauseResume, update } = useCountUp({
@@ -198,25 +167,9 @@ function Rough({
                   </>
                 ) : showNext ? (
                   <>
-                    <div class="main">
-                      <p
-                        style={{
-                          fontSize: "30px",
-                          fontFamily: "Paytone One",
-                          color: "var(--light)",
-                        }}
-                      >
-                        {" "}
-                        Loading Question
-                      </p>
-                      <div className="one_load"></div>
-                      <div className="two_load"></div>
-                      <div class="three_load"></div>
-                    </div>
-
-                    {/* <div id="bounce-in" className="bounce-in">
+                    <div id="bounce-in" className="bounce-in">
                       <h1 className="bounce-in-text">Next Question</h1>
-                    </div> */}
+                    </div>
                   </>
                 ) : (
                   <>
@@ -335,20 +288,6 @@ function Rough({
                         </div>
                       </div>
                     </div>
-                    {/* {setNextQues === true ? (
-                      <Button
-                        variant="contained"
-                        onClick={() => {
-                          next()
-                          start()
-                        }}
-                        endIcon={<NavigateNextIcon sx={{ color: "#ffff" }} />}
-                      >
-                        Next
-                      </Button>
-                    ) : (
-                      " "
-                    )} */}
                   </>
                 )}
               </div>
