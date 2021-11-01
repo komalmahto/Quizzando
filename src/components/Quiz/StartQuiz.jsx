@@ -18,7 +18,7 @@ import {
 
 function StartQuiz(props) {
   const { user } = useContext(AuthContext)
-  console.log(user.token)
+
   const history = useHistory()
   let { quizId } = useParams()
 

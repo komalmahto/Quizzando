@@ -8,10 +8,14 @@ import {
   Stack,
 } from "@mui/material"
 import "./LogIn.css"
+import { USER_SERVER } from "../../config"
+import axios from "axios"
+import GoogleLogin from "react-google-login"
+import FacebookLogin from "react-facebook-login"
 import { React, useState, useContext } from "react"
 import { useHistory } from "react-router"
 import { AuthContext } from "../../Context/AuthContext"
-import { loginCall } from "../../apiCalls"
+import { socialLogIn, loginCall } from "../../apiCalls"
 
 const theme = createTheme({
   palette: {
@@ -35,19 +39,49 @@ const theme = createTheme({
 
 function Login({ user }) {
   const { isFetching, dispatch } = useContext(AuthContext)
-
+  const [social, setSocial] = useState()
   const [field, setField] = useState({})
   const history = useHistory()
+
+  const responseGoogle = async (response) => {
+    const res = await axios.post(
+      `${USER_SERVER}/auth?access_token=${response?.accessToken}&authProvider=google`
+    )
+    setSocial(res)
+
+    console.log(response?.accessToken)
+    handleSocial()
+  }
+  const responseFacebook = async (response) => {
+    const res = await axios.post(
+      `${USER_SERVER}/auth?access_token=${response?.accessToken}&authProvider=facebook`
+    )
+    setSocial(res)
+    console.log(social, "social")
+    console.log(response?.accessToken)
+    handleSocial()
+  }
+
+  const handleSocial = async (e) => {
+    socialLogIn(social, dispatch)
+    if (!isFetching) {
+      history.push("/")
+    } else {
+      alert("error")
+    }
+  }
   const handleSubmit = async (e) => {
+    console.log(field)
     loginCall(
       {
         username: field.username,
         password: field.password,
+        email: field.email,
       },
       dispatch
     )
     if (!isFetching) {
-      history.push("/playQuiz")
+      history.push("/")
     } else {
       alert("error")
     }
@@ -87,9 +121,38 @@ function Login({ user }) {
             </Typography>
           </div>
           <div className="outbuttonContainer">
-            <div className="">
-              <ThemeProvider theme={theme}>
-                <Button
+            <GoogleLogin
+              clientId="898050232496-r9ar5u3iv276pkj5umqjgfr1b789apvg.apps.googleusercontent.com"
+              buttonText="Login"
+              render={(renderProps) => (
+                <button
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                  className="my-google-button-class"
+                >
+                  <i class="fa fa-google"></i>
+                  Login in with Google
+                </button>
+              )}
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy={"single_host_origin"}
+              cssClass="my-google-button-class"
+            />
+            <FacebookLogin
+              appId="418496103198279"
+              autoLoad={true}
+              callback={responseFacebook}
+              // onClick={componentClicked}
+              // render={(renderProps) => (
+              //   <button onClick={renderProps.onClick}>
+              //     This is my custom FB button
+              //   </button>
+              // )}
+              cssClass="my-facebook-button-class"
+              icon="fa-facebook"
+            />
+            {/* <Button
                   className="signupButton facebook"
                   color="facebook"
                   fullWidth
@@ -123,9 +186,7 @@ function Login({ user }) {
                   variant="contained"
                 >
                   <Typography variant="h5">Sign in with ASKGAMBLERS</Typography>
-                </Button>
-              </ThemeProvider>
-            </div>
+                </Button> */}
           </div>
           <div style={{ width: "100%" }}>
             <Stack direction="column" spacing={2}>

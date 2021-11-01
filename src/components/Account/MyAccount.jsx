@@ -13,7 +13,7 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet"
 
 function MyAccount() {
   const { user } = useContext(AuthContext)
-
+  console.log(user)
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),

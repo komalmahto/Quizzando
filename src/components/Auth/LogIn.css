@@ -1,3 +1,31 @@
+.my-facebook-button-class {
+  background-color: var(--darkblue);
+  color: white;
+  width: 100%;
+  font-weight: 800;
+  padding: 10px 20px;
+  border-radius: 6px;
+
+  margin: 5px auto;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
+    0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+.my-google-button-class {
+  background-color: var(--light);
+  color: var(--dark);
+  width: 100%;
+  font-weight: 800;
+  padding: 10px 20px;
+  border-radius: 6px;
+
+  margin: 0 auto;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
+    0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
 .css-1p5q5e5-MuiStack-root {
   width: 100%;
 }
@@ -92,6 +120,8 @@
 }
 .outbuttonContainer {
   margin-bottom: 10px;
+  width: 100%;
+  font-size: 15px;
 }
 .signupButton {
   margin: 3px !important;
