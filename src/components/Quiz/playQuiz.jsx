@@ -7,7 +7,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material"
-
+import { USER_SERVER } from "../../config"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router"
 import Leaderboard from "../LeaderBoard/LeaderBoard"
@@ -23,7 +23,7 @@ function PlayQuiz() {
   const [open, setOpen] = useState(false)
 
   const handleClickOpen = async () => {
-    const URL = `http://13.233.83.134:8010/quiz/end?resultId=${resultId}`
+    const URL = `${USER_SERVER}/quiz/end?resultId=${resultId}`
     try {
       const response = await fetch(URL, {
         method: "GET",
@@ -55,7 +55,7 @@ function PlayQuiz() {
   const [end, setEnded] = useState(false)
 
   const handleEnd = async () => {
-    const URL = ` http://13.233.83.134:8010/quiz/end?resultId=${resultId}`
+    const URL = `${USER_SERVER}/quiz/end?resultId=${resultId}`
     try {
       const res = await fetch(URL, {
         method: "GET",
@@ -74,7 +74,7 @@ function PlayQuiz() {
 
   useEffect(() => {
     const handleStart = async () => {
-      const URL = ` http://13.233.83.134:8010/quiz/start?quizId=${quizId}`
+      const URL = `${USER_SERVER}/quiz/start?quizId=${quizId}`
 
       try {
         const response = await fetch(URL, {

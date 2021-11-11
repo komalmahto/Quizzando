@@ -243,22 +243,27 @@ export default function Navbar() {
             </div>
           ) : (
             <>
-              <Link
-                to="/login"
-                style={{ textDecoration: `none`, color: "white" }}
-              >
-                <h6 style={{ fontSize: "14px" }} onClick={hide}>
-                  Login |{" "}
-                </h6>
-              </Link>
-              <Link
-                to="/signup"
-                style={{ textDecoration: `none`, color: "white" }}
-              >
-                <h6 style={{ fontSize: "14px" }} onClick={hide}>
-                  Sign Up
-                </h6>
-              </Link>
+              <li>
+                <Link
+                  to="/login"
+                  style={{ textDecoration: `none`, color: "white" }}
+                >
+                  <h6 style={{ fontSize: "14px" }} onClick={hide}>
+                    Login |{" "}
+                  </h6>
+                </Link>
+              </li>
+              <li>
+                {" "}
+                <Link
+                  to="/signup"
+                  style={{ textDecoration: `none`, color: "white" }}
+                >
+                  <h6 style={{ fontSize: "14px" }} onClick={hide}>
+                    Sign Up
+                  </h6>
+                </Link>
+              </li>
             </>
           )}
         </div>

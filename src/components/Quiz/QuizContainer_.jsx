@@ -93,7 +93,7 @@ function Rough({
     let URL
     console.log(ResultId, question._id, x, current)
     if (setNextQues === true) {
-      URL = `http://13.233.83.134:8010/quiz/submitAnswer?resultId=${ResultId}&quesId=${question._id}&answer=${x}&score=${current}`
+      URL = `{USER_SERVER}/quiz/submitAnswer?resultId=${ResultId}&quesId=${question._id}&answer=${x}&score=${current}`
 
       try {
         const response = await fetch(URL, {

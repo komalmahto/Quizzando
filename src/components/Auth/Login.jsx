@@ -107,9 +107,7 @@ function Login({ user }) {
                   alt=""
                 />
               </div>
-              <span style={{ fontFamily: "Paytone One" }}>
-                Login to Quizando
-              </span>
+              <span style={{ fontFamily: "Paytone One" }}>Login</span>
             </h2>
           </div>
         </div>
@@ -117,7 +115,8 @@ function Login({ user }) {
         <div className="SignupInput">
           <div>
             <Typography variant="h5">
-              Login to Quizando with your social media account or email address
+              Login with your social media account or email address
+              <br />
             </Typography>
           </div>
           <div className="outbuttonContainer">
@@ -215,7 +214,7 @@ function Login({ user }) {
             </Stack>
           </div>
           <p style={{ margin: "1em 0 0 0", fontSize: "1.6em" }}>
-            New to Quizando? Click here to{" "}
+            New ? Click here to{" "}
             <span style={{ color: "var(--cyan)" }}>
               <Link className="anchor" to="/signup">
                 Sign up.
@@ -235,7 +234,7 @@ function Login({ user }) {
           </ThemeProvider>
 
           <Typography>
-            By signing in, you agree to Quizando's <span>Privacy Policy</span> &{" "}
+            By signing in, you agree to Website's <span>Privacy Policy</span> &{" "}
             <span>Terms & Conditions.</span>
           </Typography>
         </div>

@@ -6,7 +6,7 @@ import { AuthContext } from "../../Context/AuthContext"
 import { useContext } from "react"
 import { useHistory } from "react-router"
 import Leaderboard from "../LeaderBoard/LeaderBoard"
-
+import { USER_SERVER } from "../../config"
 import {
   Button,
   Dialog,
@@ -32,7 +32,7 @@ function StartQuiz(props) {
     setOpen(false)
   }
   const handlePlayQuiz = async () => {
-    const URL = ` http://13.233.83.134:8010/quiz/start?quizId=${quizId}`
+    const URL = ` ${USER_SERVER}/quiz/start?quizId=${quizId}`
 
     try {
       const response = await fetch(URL, {
